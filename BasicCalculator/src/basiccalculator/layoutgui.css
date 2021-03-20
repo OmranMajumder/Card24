@@ -1,0 +1,114 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+@font-face {
+    font-family: 'Calculator';
+    src: url('fonts/Calculator.ttf');
+}
+
+@font-face {
+    font-family: 'Mitr Light';
+    src: url('fonts/Mitr-Light.ttf');
+}
+
+.mainFxmlClass {
+    -fx-background-color: #2b3e3a;
+}
+
+.screen {
+    -fx-alignment: center-right;
+    
+    -fx-background-color: #3b1415;
+    -fx-effect: innershadow(gaussian, black, 10, 0.2, 0, 2);
+    -fx-background-radius: 10;
+    
+    -fx-border-color: #4f141a;
+    -fx-border-width: 10;
+    -fx-border-radius: 10;
+    
+    -fx-font-family: 'Calculator';
+    -fx-font-size: 40px;
+    -fx-text-fill: #f5818c;
+}
+
+.screen .text {
+    -fx-effect: dropshadow(gaussian, red, 10, 0.65, 0, 0);
+}
+
+.button {
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, black, 8, 0.2, 0, -2);
+    
+    -fx-font-family: 'Mitr Light', 'Lucida Console';
+    -fx-font-size: 36px;
+}
+
+.orangeBtn {
+    -fx-background-color: linear-gradient(black, hsb(28.26, 47.72%, 39.61%) 4%, 
+        hsb(28.26, 67.72%, 99.61%), hsb(28.26, 37.72%, 100%) 97%, white), 
+        #fea352;
+    -fx-background-insets: 0, 3;
+}
+
+.orangeBtn:hover, .orangeBtn:focused {
+    -fx-background-color: linear-gradient(black, hsb(28.26, 47.72%, 19.61%) 4%, 
+        hsb(28.26, 67.72%, 79.61%), hsb(28.26, 37.72%, 80%) 97%, hsb(0, 0%, 80%)), 
+        hsb(28.26, 67.72%, 79.61%);
+    -fx-background-insets: 0, 3;
+}
+
+.orangeBtn:pressed {
+    -fx-background-color: linear-gradient(black, hsb(28.26, 47.72%, 39.61%) 4%, 
+        hsb(28.26, 67.72%, 99.61%), hsb(28.26, 37.72%, 100%) 97%, white), 
+        #fea352;
+    -fx-background-insets: 0, 1;
+}
+
+.blueBtn {
+    -fx-background-color: linear-gradient(black, hsb(208.13, 41.2%, 21.37%) 4%, 
+        hsb(208.13, 41.2%, 91.37%), hsb(208.13, 21.2%, 91.37%) 97%, white), 
+        #89bce9;
+    -fx-background-insets: 0, 3;
+    
+    -fx-text-fill: white;
+}
+
+.blueBtn:hover, .blueBtn:focused {
+    -fx-background-color: linear-gradient(black, hsb(208.13, 41.2%, 1.37%) 4%, 
+        hsb(208.13, 41.2%, 71.37%), hsb(208.13, 21.2%, 71.37%) 97%, hsb(0, 0%, 80%)), 
+        hsb(208.13, 41.2%, 71.37%);
+    -fx-background-insets: 0, 3;
+}
+
+.blueBtn:pressed {
+    -fx-background-color: linear-gradient(black, hsb(208.13, 41.2%, 21.37%) 4%, 
+        hsb(208.13, 41.2%, 91.37%), hsb(208.13, 21.2%, 91.37%) 97%, white), 
+        #89bce9;
+    -fx-background-insets: 0, 1;
+}
+
+.grayBtn {
+    -fx-background-color: linear-gradient(black, hsb(0, 0%, 25%) 4%, 
+        hsb(0, 0%, 100%), hsb(0, 0%, 75%) 97%, white), 
+        #ffffff;
+    -fx-background-insets: 0, 3;
+}
+
+.grayBtn:hover {
+    -fx-background-color: linear-gradient(black, hsb(0, 0%, 5%) 4%, 
+        hsb(0, 0%, 80%), hsb(0, 0%, 55%) 97%, hsb(0, 0%, 80%)), 
+        hsb(0, 0%, 80%);
+    -fx-background-insets: 0, 3;
+}
+
+.grayBtn:pressed {
+    -fx-background-color: linear-gradient(black, hsb(0, 0%, 25%) 4%, 
+        hsb(0, 0%, 100%), hsb(0, 0%, 75%) 97%, white), 
+        #ffffff;
+    -fx-background-insets: 0, 1;
+}
+
+.clearEntryBtn {
+    -fx-font-size: 30px;    
+}
