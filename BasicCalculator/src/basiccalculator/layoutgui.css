@@ -110,5 +110,11 @@
 }
 
 .clearEntryBtn {
-    -fx-font-size: 30px;    
+    -fx-font-size: 36px;
+    -fx-padding: 0 0 0 0;
+}
+
+#arith.blueBtn, .orangeBtn{
+    -fx-font-size: 50px;
+    -fx-padding: 0 0 0 0;
 }

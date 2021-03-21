@@ -27,8 +27,9 @@ public class LayoutGUIController implements Initializable {
     final private Integer MAX_DIGITS = 17;
     
     private Integer digitCount = 0;
-    private Integer resultCount = 0;
-    private Integer arithCount = 0;
+    
+    private Boolean arithPressed = false;
+    private Boolean resultPressed = false;
     
     @FXML
     private TextField outputScrn;
@@ -52,6 +53,24 @@ public class LayoutGUIController implements Initializable {
     private Button percentBtn;
     @FXML
     private Button divBtn;
+    @FXML
+    private Button sevenBtn;
+    @FXML
+    private Button eightBtn;
+    @FXML
+    private Button fourBtn;
+    @FXML
+    private Button oneBtn;
+    @FXML
+    private Button fiveBtn;
+    @FXML
+    private Button nineBtn;
+    @FXML
+    private Button sixBtn;
+    @FXML
+    private Button twoBtn;
+    @FXML
+    private Button threeBtn;
 
     /**
      * Initializes the controller class.
@@ -70,21 +89,28 @@ public class LayoutGUIController implements Initializable {
             input = input.substring(0, input.length() - 2);
         }
         
-            return input;
+        return input;
         
     }
     
     @FXML
     private void addDigit(ActionEvent event) {
         
+        if (resultPressed == true && digitCount == 0) {
+            outputScrn.clear();
+            currInput = "";
+            savedInput = "";
+        }
+        
         if (digitCount <= MAX_DIGITS) {
-            
+
+            // condition to replace zero screen
+            if (arithPressed == false && digitCount == 0) {
+                outputScrn.clear();
+            }
+                     
             digitCount++;
             
-            if (currOpr.equals("DEFAULT") && currInput.equals("")) {
-            outputScrn.clear();
-            }
-        
             Button btn = (Button)event.getSource();
 
             switch (btn.getText()) {
@@ -129,13 +155,13 @@ public class LayoutGUIController implements Initializable {
     @FXML
     private void calculate(ActionEvent event) {
         
-        if (!currOpr.equals("DEFAULT") && !currInput.equals("") && 
-                !savedInput.equals("")) {
+        if (arithPressed != false && digitCount != 0 && !savedInput.equals("")) {
             
-            digitCount = 0;
+            resultPressed = true;
+            arithPressed = false;
 
             currInput = outputScrn.getText();
-        
+            
             double num1 = Double.parseDouble(currInput);
             double num2 = Double.parseDouble(savedInput);
             
@@ -154,6 +180,8 @@ public class LayoutGUIController implements Initializable {
                     break;              
             }
             
+            digitCount = 0;
+            
             currOpr = "DEFAULT";
             savedInput = "";
             
@@ -166,9 +194,11 @@ public class LayoutGUIController implements Initializable {
     @FXML
     private void addDec(ActionEvent event) {
         
-        if (currInput.equals("")) {
-            currInput += "0.";
+        if (digitCount == 0 || resultPressed == true) {
+            currInput = "0.";
+            resultPressed = false;
         }
+        
         else if (!currInput.contains(".")) {
             currInput += ".";    
         }       
@@ -180,9 +210,12 @@ public class LayoutGUIController implements Initializable {
     @FXML
     private void arithOpr(ActionEvent event) {
         
-        if (!currInput.equals("") && !savedInput.equals("")) {
+        if (digitCount != 0 && !savedInput.equals("") && arithPressed == true) {
             calculate(event);
         }        
+        
+        arithPressed = true;
+        resultPressed = false;
         
         savedInput = currInput;
         currInput = "";
@@ -192,24 +225,16 @@ public class LayoutGUIController implements Initializable {
         switch (((Button)event.getSource()).getText()) {
             case "+":
                 currOpr = "ADD";
-                outputScrn.clear();
                 break;
             case "-":
                 currOpr = "MINUS";
-                outputScrn.clear();
                 break;
             case "×":
                 currOpr = "MULT";
-                outputScrn.clear();
                 break;
             case "÷":
                 currOpr = "DIV";
-                outputScrn.clear();
                 break;
-        }
-        
-        if (!currOpr.equals("DEFAULT")) {
-            outputScrn.setText("0");
         }
         
     }
@@ -217,12 +242,14 @@ public class LayoutGUIController implements Initializable {
     @FXML
     private void clearOpr(ActionEvent event) {
         
+        resultPressed = false;
         currInput = "";
         
         if (((Button)event.getSource()).getText().equals("C")) {
             savedInput = "";
             currOpr = "DEFAULT";
             outputScrn.setText("0");
+            resetCounts();
         }
         else {
             outputScrn.setText("0");
@@ -231,12 +258,23 @@ public class LayoutGUIController implements Initializable {
     }
 
     @FXML
-    private void percOpr(ActionEvent event) {
-
-        double num = Double.parseDouble(savedInput);
-        savedInput = Double.toString(num / 100.0);
-        outputScrn.setText(savedInput);
+    private void percOpr(ActionEvent event) { 
         
+        if (!savedInput.equals("")) {
+            double perc = Double.parseDouble(currInput);
+            double num = Double.parseDouble(savedInput);
+            currInput = Double.toString(perc * num / 100.0);
+            outputScrn.setText(formatResult(currInput));
+            
+            resultPressed = true;
+            digitCount = 0;
+        }
+        
+    }
+    
+    private void resetCounts() {
+        arithPressed = false;
+        digitCount = 0;
     }
     
 }

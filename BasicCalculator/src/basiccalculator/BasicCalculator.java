@@ -12,6 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -31,8 +33,18 @@ public class BasicCalculator extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("LayoutGUI.fxml"));
+        
+        
+        
         stage.setScene(new Scene(root));
         stage.setTitle("Omi's Basic Calculator");
         stage.show();
+        
+        root.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
+        if(key.getCode()==KeyCode.ENTER) {
+            System.out.println("You pressed enter");
+        }
+        });
+        
     }
 }
