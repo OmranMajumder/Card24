@@ -1,7 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Omran (Omi) Majumder
+ * Dr. Alrajab
+ * BCS345 JAVA Programming
+ * 22 March 2021
+ * Assignment 4
+ * This program is a basic calculator.
  */
 package basiccalculator;
 
@@ -20,17 +23,22 @@ import javafx.scene.control.TextField;
  */
 public class LayoutGUIController implements Initializable {
     
+    // declaration and initialization of "container" variables for holding the
+    // current operation, current input, and saved input
     private String currOpr = "DEFAULT";
     private String currInput = "";
     private String savedInput = "";
     
-    final private Integer MAX_DIGITS = 17;
-    
+    // declaration and initialization of conditional counters and booleans
+    // tracking button presses and input length
     private Integer digitCount = 0;
-    
     private Boolean arithPressed = false;
     private Boolean resultPressed = false;
     
+    // declaration and initialization of constant for max digit length
+    final private Integer MAX_DIGITS = 17;
+    
+    // JavaFX objects imported from SceneBuilder
     @FXML
     private TextField outputScrn;
     @FXML
@@ -78,10 +86,12 @@ public class LayoutGUIController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        // startup "zero" screen
         outputScrn.setText("0");
         
     }    
     
+    // private method for formatting results; excises trailing zeros and decimal
     private String formatResult (String input) {
         
         while (input.endsWith("0") || input.endsWith(".") && 
@@ -93,26 +103,33 @@ public class LayoutGUIController implements Initializable {
         
     }
     
+    // method to add digit to output screen
     @FXML
     private void addDigit(ActionEvent event) {
         
+        // resets calculation if a digit is entered without an operation
         if (resultPressed == true && digitCount == 0) {
             outputScrn.clear();
             currInput = "";
             savedInput = "";
         }
         
+        // condition to add digit if below the maximum number of digits
         if (digitCount <= MAX_DIGITS) {
 
-            // condition to replace zero screen
+            // condition to replace zero screen with input
             if (arithPressed == false && digitCount == 0) {
                 outputScrn.clear();
             }
-                     
+            
+            // digit count incremented when digit added to current input
             digitCount++;
             
+            // casting event to button
             Button btn = (Button)event.getSource();
-
+            
+            // selection statement to read entered input; increments current
+            // input with added digit
             switch (btn.getText()) {
                 case "1": 
                     currInput += "1";
@@ -145,26 +162,34 @@ public class LayoutGUIController implements Initializable {
                     currInput += "0";
                     break;
             }
-
+            
+            // outputs added digit to output screen
             outputScrn.setText(currInput);
             
         }
           
     }
     
+    // method to calculate the result of arithmetic operations
     @FXML
     private void calculate(ActionEvent event) {
         
-        if (arithPressed != false && digitCount != 0 && !savedInput.equals("")) {
+        // condition to calculate results; requires arithmetic input, current
+        // input and saved input
+        if (arithPressed != false && !currInput.equals("") && !savedInput.equals("")) {
             
+            // updates boolean variables to reflect button presses and resets
             resultPressed = true;
             arithPressed = false;
-
+            
+            // stores output to current input
             currInput = outputScrn.getText();
             
+            // stores double value of inputs in double variables
             double num1 = Double.parseDouble(currInput);
             double num2 = Double.parseDouble(savedInput);
             
+            // selection statement to calculate results of arithmetic operation
             switch (currOpr) {
                 case "ADD":
                     currInput = "" + (num2 + num1);
@@ -180,48 +205,59 @@ public class LayoutGUIController implements Initializable {
                     break;              
             }
             
+            // resets digit counter, current operation, and saved input to 
+            // default values
             digitCount = 0;
-            
             currOpr = "DEFAULT";
             savedInput = "";
             
+            // outputs results to output screen
             outputScrn.setText(formatResult(currInput));
             
         }
         
     }
-
+    
+    // method to add decimal point to input number string
     @FXML
     private void addDec(ActionEvent event) {
         
+        // formats input string if starting with a decimal point
         if (digitCount == 0 || resultPressed == true) {
             currInput = "0.";
             resultPressed = false;
         }
         
+        // prevents extraneous decimal points
         else if (!currInput.contains(".")) {
             currInput += ".";    
         }       
         
+        // outputs number string with decimal point
         outputScrn.setText(currInput);
         
     }
-
+    
+    // method for assigning arithmetic operation
     @FXML
     private void arithOpr(ActionEvent event) {
         
+        // condition to calculate results if arithmetic operations are "chained"
         if (digitCount != 0 && !savedInput.equals("") && arithPressed == true) {
             calculate(event);
         }        
         
+        // updates boolean variables to reflect button presses and resets
         arithPressed = true;
         resultPressed = false;
         
+        // assigns saved input with current input and resets current input and
+        // digit coutner to default values
         savedInput = currInput;
         currInput = "";
-        
         digitCount = 0;
         
+        // selection statement to assign arithmetic operation
         switch (((Button)event.getSource()).getText()) {
             case "+":
                 currOpr = "ADD";
@@ -238,43 +274,51 @@ public class LayoutGUIController implements Initializable {
         }
         
     }
-
+    
+    // method for "clear" operations, "C," and "CE"
     @FXML
     private void clearOpr(ActionEvent event) {
         
+        // resets result button press and current input to default values
         resultPressed = false;
         currInput = "";
         
+        // selection statement to determine correct "clear" operation
         if (((Button)event.getSource()).getText().equals("C")) {
+            // resets all inputs to default values; outputs "zero" screen
             savedInput = "";
             currOpr = "DEFAULT";
+            arithPressed = false;
+            digitCount = 0;
             outputScrn.setText("0");
-            resetCounts();
         }
+        // resets the last input to zero
         else {
             outputScrn.setText("0");
         }
              
     }
-
+    
+    // method to calculate percentages (ex. 72 + 5% = 75.6)
     @FXML
     private void percOpr(ActionEvent event) { 
         
+        // condition for valid percent input; requires saved input
         if (!savedInput.equals("")) {
+            // stores double value of inputs in variables
             double perc = Double.parseDouble(currInput);
             double num = Double.parseDouble(savedInput);
+            // assigns current input with value of percent calculation
             currInput = Double.toString(perc * num / 100.0);
+            // outputs result to screen (press "=" to complete operation)
             outputScrn.setText(formatResult(currInput));
             
+            // updates boolean variable for result button press and resets
+            // digit counter to default value
             resultPressed = true;
             digitCount = 0;
         }
         
-    }
-    
-    private void resetCounts() {
-        arithPressed = false;
-        digitCount = 0;
     }
     
 }

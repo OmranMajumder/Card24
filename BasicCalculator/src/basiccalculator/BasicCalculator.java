@@ -1,7 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Omran (Omi) Majumder
+ * Dr. Alrajab
+ * BCS345 JAVA Programming
+ * 22 March 2021
+ * Assignment 4
+ * This program is a basic calculator.
  */
 package basiccalculator;
 
@@ -32,19 +35,12 @@ public class BasicCalculator extends Application {
        
     @Override
     public void start(Stage stage) throws Exception {
+        
         Parent root = FXMLLoader.load(getClass().getResource("LayoutGUI.fxml"));
-        
-        
         
         stage.setScene(new Scene(root));
         stage.setTitle("Omi's Basic Calculator");
         stage.show();
-        
-        root.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
-        if(key.getCode()==KeyCode.ENTER) {
-            System.out.println("You pressed enter");
-        }
-        });
         
     }
 }
