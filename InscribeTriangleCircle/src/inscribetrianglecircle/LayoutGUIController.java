@@ -161,9 +161,7 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
         angAB = Math.toDegrees(Math.acos((sideA * sideA + sideB * sideB - sideC * sideC) / (2 * sideA * sideB)));
         angBC = Math.toDegrees(Math.acos((sideB * sideB + sideC * sideC - sideA * sideA) / (2 * sideB * sideC)));
         angCA = Math.toDegrees(Math.acos((sideC * sideC + sideA * sideA - sideB * sideB) / (2 * sideC * sideA)));
-        
-        System.out.println("angCA: " + angCA + " angAB: " + angAB + " angBC: " + angBC);
-        
+                
     }
     
     private void setLabels() {
