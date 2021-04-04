@@ -14,9 +14,9 @@
    <children>
       <Circle fx:id="circleTrack" fill="WHITE" layoutX="300.0" layoutY="300.0" radius="250.0" stroke="BLACK" strokeType="INSIDE" />
       <Polygon fx:id="triangle" fill="WHITE" layoutX="300.0" layoutY="319.0" points="0.0, 231.0, 250.0, -19.0, -250.0, -19.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="circle1" fill="RED" layoutX="50.0" layoutY="300.0" onMouseDragged="#dragNode" onMouseReleased="#moveNode" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="circle2" fill="RED" layoutX="550.0" layoutY="300.0" onMouseDragged="#dragNode" onMouseReleased="#moveNode" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="circle3" fill="RED" layoutX="300.0" layoutY="550.0" onMouseDragged="#dragNode" onMouseReleased="#moveNode" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="circle1" fill="RED" layoutX="50.0" layoutY="300.0" onMouseDragged="#dragNode" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="circle2" fill="RED" layoutX="550.0" layoutY="300.0" onMouseDragged="#dragNode" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="circle3" fill="RED" layoutX="300.0" layoutY="550.0" onMouseDragged="#dragNode" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
       <Label fx:id="label1" layoutX="91.0" layoutY="300.0" prefHeight="40.0" prefWidth="50.0" styleClass="labels" text="45.0" textAlignment="CENTER" />
       <Label fx:id="label2" layoutX="460.0" layoutY="300.0" prefHeight="40.0" prefWidth="50.0" styleClass="labels" text="45.0" textAlignment="CENTER" />
       <Label fx:id="label3" layoutX="300.0" layoutY="500.0" prefHeight="40.0" prefWidth="50.0" styleClass="labels" text="90.0" textAlignment="CENTER" />

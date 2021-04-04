@@ -1,8 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Christine Lofaso & Omran (Omi) Majumder
+ * Dr. Alrajab
+ * BCS345 JAVA Programming
+ * 7 April 2021
+ * Week 9 Assignment
+ * This program displays the angles of a triangle inscribed in a circle with 
+ * draggable vertices.
  */
+
 package inscribetrianglecircle;
 
 import javafx.application.Application;
@@ -13,7 +18,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author omran
+ * @author Christine Lofaso & Omran (Omi) Majumder
  */
 public class InscribeTriangleCircle extends Application {
 
