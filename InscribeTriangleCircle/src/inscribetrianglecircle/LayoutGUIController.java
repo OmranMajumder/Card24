@@ -5,26 +5,17 @@
  */
 package inscribetrianglecircle;
 
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseListener;
-import static com.sun.java.accessibility.util.AWTEventMonitor.addMouseMotionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseAdapter;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 
 /**
@@ -33,6 +24,7 @@ import javafx.scene.shape.Polygon;
  * @author omran
  */
 public class LayoutGUIController implements Initializable, MouseListener, MouseMotionListener {
+    
     Double sideA, sideB, sideC, angAB, angBC, angCA;
     final Double RADIUS = 250.0;
     
@@ -44,7 +36,6 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
     private Circle circle2;
     @FXML
     private Circle circle3;
-    private Label label;
     @FXML
     private AnchorPane root;
     @FXML
@@ -55,8 +46,8 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
     private Label label2;
     @FXML
     private Label label3;
-    
-    
+    @FXML
+    private Label userPrompt;
     
     /**
      * Initializes the controller class.
@@ -66,10 +57,6 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
         positionAngles();
     }    
                 
-    
-    
-    
-    
     private void drawTriangle() {
 
         triangle.getPoints().setAll(
@@ -90,7 +77,6 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
     }
 
     @FXML
-    
     private void moveNode(javafx.scene.input.MouseEvent event) {
         /*
         Double xAdj, yAdj, hypot, ratio;
@@ -133,6 +119,7 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
     }
     
     private void positionAngle(Circle circle, Label label) {
+        
         Double xAdj, yAdj, ratio;
 
         ratio = 200 / RADIUS;
@@ -172,14 +159,7 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
         
     }
     
-    public void circlesToFront() {
-        
-        circle1.toFront();
-        circle2.toFront();
-        circle3.toFront();
-        
-    }
-    
+    // Mouse listener abstract methods
     @Override
     public void mouseClicked(MouseEvent me) {
     }
@@ -196,14 +176,12 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
     public void mouseReleased(MouseEvent me) {
     }
     
+    // Mouse motion listener abstract methods
     @Override
     public void mouseDragged(MouseEvent me) {
-
     }
-
     @Override
     public void mouseMoved(MouseEvent me) {
- 
     }
     
 }

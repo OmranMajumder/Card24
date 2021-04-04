@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inscribetrianglecircle.LayoutGUIController">
     <stylesheets>
@@ -19,5 +20,10 @@
       <Label fx:id="label1" layoutX="91.0" layoutY="300.0" prefHeight="40.0" prefWidth="50.0" styleClass="labels" text="45.0" textAlignment="CENTER" />
       <Label fx:id="label2" layoutX="460.0" layoutY="300.0" prefHeight="40.0" prefWidth="50.0" styleClass="labels" text="45.0" textAlignment="CENTER" />
       <Label fx:id="label3" layoutX="300.0" layoutY="500.0" prefHeight="40.0" prefWidth="50.0" styleClass="labels" text="90.0" textAlignment="CENTER" />
+      <Label fx:id="userPrompt" layoutX="27.0" layoutY="11.0" text="Drag the red anchor points to change the dimensions of the triangle!">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
