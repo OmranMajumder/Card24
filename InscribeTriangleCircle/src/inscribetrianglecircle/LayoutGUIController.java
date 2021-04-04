@@ -155,6 +155,8 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
     // Positions all labels with corresponding anchor circle
     private void positionAngles() {
         
+        // Calls method to position angle labels around corresponding circle
+        // anchor
         positionAngle(circle1, label1);
         positionAngle(circle2, label2);
         positionAngle(circle3, label3);
