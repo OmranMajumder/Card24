@@ -10,15 +10,13 @@
 
 package inscribetrianglecircle;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseAdapter;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
@@ -28,7 +26,7 @@ import javafx.scene.shape.Polygon;
  *
  * @author Christine Lofaso & Omran (Omi) Majumder
  */
-public class LayoutGUIController implements Initializable, MouseListener, MouseMotionListener {
+public class LayoutGUIController implements Initializable {
     
     // Declares variables for triangle sides and angles
     Double sideA, sideB, sideC, angAB, angBC, angCA;
@@ -56,15 +54,18 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
     private Label label3;
     @FXML
     private Label userPrompt;
+    @FXML
+    private Label mouseTracker;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+ 
         // Positions angle labels at program start
         positionAngles();
+        
     }    
     
     // Draws traingle polygon between anchor circles
@@ -91,8 +92,8 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
     // Imported method from SceneBuilder called when anchor circle nodes are
     // dragged
     @FXML
-    private void dragNode(javafx.scene.input.MouseEvent event) {
-        
+    private void dragNode(MouseEvent event) {
+        setMouseLocation(event);
         // Declares variables for XY coordinate adjustment, similar triangle
         // hypotenuses, and ratio between similar triangles
         Double xAdj, yAdj, hypot, ratio;
@@ -147,7 +148,7 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
         
         // Sets XY coordinates of angle labels to an invisible radius within
         // the "circle track"
-        label.setLayoutX(295 + xAdj);
+        label.setLayoutX(290 + xAdj);
         label.setLayoutY(300 + yAdj);
         
     }
@@ -195,30 +196,19 @@ public class LayoutGUIController implements Initializable, MouseListener, MouseM
         
     }
     
-    // Mouse listener abstract methods
-    @Override
-    public void mouseClicked(MouseEvent me) {
-    }
-    @Override
-    public void mouseEntered(MouseEvent me) {
-    }
-    @Override
-    public void mouseExited(MouseEvent me) {
-    }
-    @Override
-    public void mousePressed(MouseEvent me) {
-    }
-    @Override
-    public void mouseReleased(MouseEvent me) {
-    }
-    
-    // Mouse motion listener abstract methods
-    @Override
-    public void mouseDragged(MouseEvent me) {
-    }
-    @Override
-    public void mouseMoved(MouseEvent me) {
+    // Imported method from SceneBuilder called to track mouse location moving
+    // within window and when mouse drag occurs
+    @FXML
+    private void setMouseLocation(MouseEvent event) {
+        
+        // Declares variable to restrict text to one decimal place
+        DecimalFormat df = new DecimalFormat("#.0");
+       
+        // Sets text of label to continuously adjust coordinates based on mouse 
+        // location within the scene
+        mouseTracker.setText("Mouse Location: (" + df.format(event.getSceneX()) 
+                + ", " + df.format(event.getSceneY()) + ")");
+        
     }
     
 }
-

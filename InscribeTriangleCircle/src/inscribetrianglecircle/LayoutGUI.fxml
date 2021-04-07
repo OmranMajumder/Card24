@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="600.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inscribetrianglecircle.LayoutGUIController">
+<AnchorPane id="AnchorPane" fx:id="root" onMouseDragOver="#setMouseLocation" onMouseMoved="#setMouseLocation" prefHeight="600.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="inscribetrianglecircle.LayoutGUIController">
     <stylesheets>
         <URL value="@layoutgui.css" />
     </stylesheets>
@@ -23,6 +23,11 @@
       <Label fx:id="userPrompt" layoutX="27.0" layoutY="11.0" text="Drag the red anchor points to change the dimensions of the triangle!">
          <font>
             <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="mouseTracker" alignment="CENTER_RIGHT" layoutX="415.0" layoutY="574.0" prefHeight="16.0" prefWidth="175.0" text="Mouse Location: (x, y)">
+         <font>
+            <Font size="11.0" />
          </font>
       </Label>
    </children>

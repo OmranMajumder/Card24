@@ -36,6 +36,7 @@ public class InscribeTriangleCircle extends Application {
         stage.setScene(new Scene(root));
         stage.setTitle("Inscribed Triangle");
         stage.show();
+        
     }
     
 }
