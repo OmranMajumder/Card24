@@ -17,9 +17,9 @@
       <Circle fx:id="circle1" fill="RED" layoutX="50.0" layoutY="300.0" onMouseDragged="#dragNode" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="circle2" fill="RED" layoutX="550.0" layoutY="300.0" onMouseDragged="#dragNode" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="circle3" fill="RED" layoutX="300.0" layoutY="550.0" onMouseDragged="#dragNode" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="label1" layoutX="91.0" layoutY="300.0" prefHeight="40.0" prefWidth="50.0" styleClass="labels" text="45.0" textAlignment="CENTER" />
-      <Label fx:id="label2" layoutX="460.0" layoutY="300.0" prefHeight="40.0" prefWidth="50.0" styleClass="labels" text="45.0" textAlignment="CENTER" />
-      <Label fx:id="label3" layoutX="300.0" layoutY="500.0" prefHeight="40.0" prefWidth="50.0" styleClass="labels" text="90.0" textAlignment="CENTER" />
+      <Label fx:id="label1" layoutX="90.0" layoutY="312.0" prefHeight="20.0" prefWidth="35.0" styleClass="labels" text="45.0" textAlignment="CENTER" />
+      <Label fx:id="label2" layoutX="478.0" layoutY="312.0" prefHeight="20.0" prefWidth="35.0" styleClass="labels" text="45.0" textAlignment="CENTER" />
+      <Label fx:id="label3" layoutX="288.0" layoutY="500.0" prefHeight="20.0" prefWidth="35.0" styleClass="labels" text="90.0" textAlignment="CENTER" />
       <Label fx:id="userPrompt" layoutX="27.0" layoutY="11.0" text="Drag the red anchor points to change the dimensions of the triangle!">
          <font>
             <Font size="18.0" />

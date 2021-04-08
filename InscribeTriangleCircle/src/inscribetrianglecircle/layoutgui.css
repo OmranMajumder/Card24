@@ -7,5 +7,9 @@
 }
 
 .labels {
-    text-align: center;
+    -fx-text-align: center;
+}
+
+.mainFxmlClass#AnchorPane {
+    -fx-background-color: white;
 }

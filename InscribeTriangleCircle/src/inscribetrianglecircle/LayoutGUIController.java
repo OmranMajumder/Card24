@@ -29,7 +29,7 @@ import javafx.scene.shape.Polygon;
 public class LayoutGUIController implements Initializable {
     
     // Declares variables for triangle sides and angles
-    Double sideA, sideB, sideC, angAB, angBC, angCA;
+    Double sideA, sideB, sideC, angAB, angBC, angCA, centX = 300.0, centY = 425.0;
     // Declares constant for the radius of the "circle track"
     final Double RADIUS = 250.0;
     
@@ -64,7 +64,7 @@ public class LayoutGUIController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
  
         // Positions angle labels at program start
-        positionAngles();
+        printAngles();
         
     }    
     
@@ -93,7 +93,11 @@ public class LayoutGUIController implements Initializable {
     // dragged
     @FXML
     private void dragNode(MouseEvent event) {
+        
+        // Sets mouse coordinates when nodes are dragged
         setMouseLocation(event);
+        
+        
         // Declares variables for XY coordinate adjustment, similar triangle
         // hypotenuses, and ratio between similar triangles
         Double xAdj, yAdj, hypot, ratio;
@@ -131,25 +135,49 @@ public class LayoutGUIController implements Initializable {
     // Positions angle label above specified anchor circle
     private void positionAngle(Circle circle, Label label) {
         
-        // Declares variables for XY coordinate adjustment and ratio between 
-        // similar triangles
-        Double xAdj, yAdj, ratio;
+        // Declares variables for XY coordinates
+        Double newX, newY;
         
-        // Calculates ratio between similar triangles (one triangle has a
-        // hypotenuse formed from the desired radius away from the center of the
-        // "circle track" where the label will be positioned and the other with 
-        // a hypotenuse of the radius of the "circle track"
-        ratio = 200 / RADIUS;
+        // Calls method to calculate the center coordinates of the triangle
+        // polygon
+        calculateTriangleCenter();
         
-        // Applies ratio between similar triangle hypotenuses to calculate 
-        // XY coordinate adjustment values for label positioning
-        xAdj = ratio * (circle.getLayoutX() - 300);
-        yAdj = ratio * (circle.getLayoutY() - 300);
+        // Determines coordinates 75% between the anchor circle coordinates and 
+        // center coordinates of the triangle polygon
+        newX = calculateMidpoint(circle.getLayoutX(), 
+                calculateMidpoint(centX, circle.getLayoutX()));
+        newY = calculateMidpoint(circle.getLayoutY(), 
+                calculateMidpoint(centY, circle.getLayoutY()));
         
-        // Sets XY coordinates of angle labels to an invisible radius within
-        // the "circle track"
-        label.setLayoutX(290 + xAdj);
-        label.setLayoutY(300 + yAdj);
+        // Sets XY coordinates at 75% between anchor circle and center of
+        // triangle polygon
+        label.setLayoutX(newX - 10);
+        label.setLayoutY(newY - 10);
+        
+    }
+    
+    // Calculates midpoint between two X or two Y coordinates (average formula)
+    private double calculateMidpoint(Double p1, Double p2) {
+        
+        // Declares variable for midpoint value
+        double midX;
+        
+        // Averages input points
+        midX = (p1 + p2) / 2.0;
+        
+        return midX;
+        
+    }
+    
+    // Calculates the center coordinates of the triangle polygon
+    private void calculateTriangleCenter() {
+        
+        // Calculates center coordinates by average X and Y coordinates
+        // of anchor circles
+        centX = (circle1.getLayoutX() + circle2.getLayoutX() + circle3.getLayoutX())
+                / 3;
+        centY = (circle1.getLayoutY() + circle2.getLayoutY() + circle3.getLayoutY())
+                / 3;
         
     }
     
