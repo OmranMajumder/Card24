@@ -7,6 +7,7 @@ package card24;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,7 +27,7 @@ public class FXMLDocumentController implements Initializable {
     String test = " (4 + 2)* 3 + 2";
     
     ArrayList<Rectangle> cards = new ArrayList();
-    ArrayList<String> randomDraw = new ArrayList();
+    ArrayList<String> cardCodes = new ArrayList();
     ArrayList<String> validValues = new ArrayList();
 
     @FXML
@@ -61,13 +62,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         initializeCards();
-        
-        randomDraw.add("310");
-        randomDraw.add("11");
-        randomDraw.add("44");
-        randomDraw.add("213");
-        
-        drawCards(randomDraw);
+        drawCards(cardCodes);
         test = removeSpaces(test);
         
         System.out.println(test);
@@ -108,9 +103,9 @@ public class FXMLDocumentController implements Initializable {
         int i;
         
         for (i = input.length() - 1; i >= 0; i--) {
-                if (input.charAt(i) == '(')
-                    break;
-            }
+            if (input.charAt(i) == '(')
+                break;
+        }
         
         return i;
         
@@ -121,8 +116,10 @@ public class FXMLDocumentController implements Initializable {
         int i;
 
         for (i = input.length() - 1; i >= 0; i--) {
+            
             if (input.charAt(i) == ')')
                 break;
+            
         }
 
         return i;
@@ -238,7 +235,7 @@ public class FXMLDocumentController implements Initializable {
         
     }
     
-    public void drawCards(ArrayList<String> cardsDrawn) {
+    public void setCardFaces(ArrayList<String> cardsDrawn) {
         
         for (int i = 0; i < cardsDrawn.size(); i++) {
             
@@ -273,9 +270,35 @@ public class FXMLDocumentController implements Initializable {
     public void endGame() {
         
         // Add to user game count and user results count
-        randomDraw.clear();
+        cardCodes.clear();
         validValues.clear();
         // Run random number generator again
+        
+    }
+    
+    public void drawCards(ArrayList<String> cardCodes) {
+        
+        Integer suit, cardValue;
+        String cardCode;
+        
+        Random randGen = new Random();
+        for (int i = 0; i < 4; i++) {
+            
+            suit = randGen.nextInt(4) + 1;
+            cardValue = randGen.nextInt(13) + 1;
+            
+            cardCode = Integer.toString(suit) + Integer.toString(cardValue);
+            
+            if (i == 0)
+                cardCodes.add(cardCode);
+            else if (i != 0 && !(cardCode.equals(cardCodes.get(i - 1))))
+                cardCodes.add(cardCode);
+            else
+                i--;
+
+        }
+        
+        setCardFaces(cardCodes);
         
     }
     

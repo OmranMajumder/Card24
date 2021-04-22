@@ -13,10 +13,10 @@
         <URL value="@fxmldocument.css" />
     </stylesheets>
    <children>
-      <Rectangle fx:id="cardBox1" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="20.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="250.0" />
-      <Rectangle fx:id="cardBox2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="280.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="250.0" />
-      <Rectangle fx:id="cardBox3" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="540.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="250.0" />
-      <Rectangle fx:id="cardBox4" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="800.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" width="250.0" />
+      <Rectangle fx:id="cardBox1" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="20.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0" />
+      <Rectangle fx:id="cardBox2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="280.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0" />
+      <Rectangle fx:id="cardBox3" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="540.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0" />
+      <Rectangle fx:id="cardBox4" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="800.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0" />
       <Label fx:id="userPrompt" layoutX="20.0" layoutY="483.0" text="Enter an expression:">
          <font>
             <Font size="24.0" />
