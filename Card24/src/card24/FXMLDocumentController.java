@@ -247,6 +247,8 @@ public class FXMLDocumentController implements Initializable {
             
         }
         
+        storeCardValues(cardsDrawn);
+        
     }
     
     public void initializeCards() {
@@ -258,10 +260,21 @@ public class FXMLDocumentController implements Initializable {
         
     }
     
+    public void storeCardValues(ArrayList<String> cardsDrawn) {
+        
+        for (int i = 0; i < cardsDrawn.size(); i++) {
+            
+            validValues.add(cardsDrawn.get(i).substring(1));
+            
+        }
+
+    }
+    
     public void endGame() {
         
         // Add to user game count and user results count
         randomDraw.clear();
+        validValues.clear();
         // Run random number generator again
         
     }
