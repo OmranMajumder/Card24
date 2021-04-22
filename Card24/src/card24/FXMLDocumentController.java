@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -23,8 +25,10 @@ import javafx.scene.shape.Rectangle;
 public class FXMLDocumentController implements Initializable {
     String test = " (4 + 2)* 3 + 2";
     
-    int userNum1, userNum2, userNum3, userNum4;
-    
+    ArrayList<Rectangle> cards = new ArrayList();
+    ArrayList<String> randomDraw = new ArrayList();
+    ArrayList<String> validValues = new ArrayList();
+
     @FXML
     private Rectangle cardBox1;
     @FXML
@@ -45,16 +49,30 @@ public class FXMLDocumentController implements Initializable {
     private Button solveButton;
     @FXML
     private Button checkButton;
-
+    
+        
+        
+   
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        initializeCards();
+        
+        randomDraw.add("310");
+        randomDraw.add("11");
+        randomDraw.add("44");
+        randomDraw.add("213");
+        
+        drawCards(randomDraw);
         test = removeSpaces(test);
         
         System.out.println(test);
         System.out.println(evaluateExpression(test));
+        
     }    
     
     public String removeSpaces(String input) {
@@ -220,5 +238,32 @@ public class FXMLDocumentController implements Initializable {
         
     }
     
+    public void drawCards(ArrayList<String> cardsDrawn) {
+        
+        for (int i = 0; i < cardsDrawn.size(); i++) {
+            
+            Image img = new Image("file:PlayingCards/" + cardsDrawn.get(i) + ".png");
+            cards.get(i).setFill(new ImagePattern(img));
+            
+        }
+        
+    }
+    
+    public void initializeCards() {
+        
+        cards.add(cardBox1);
+        cards.add(cardBox2);
+        cards.add(cardBox3);
+        cards.add(cardBox4);
+        
+    }
+    
+    public void endGame() {
+        
+        // Add to user game count and user results count
+        randomDraw.clear();
+        // Run random number generator again
+        
+    }
     
 }
