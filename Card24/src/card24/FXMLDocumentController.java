@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -28,7 +29,8 @@ public class FXMLDocumentController implements Initializable {
     
     ArrayList<Rectangle> cards = new ArrayList();
     ArrayList<String> cardCodes = new ArrayList();
-    ArrayList<String> validValues = new ArrayList();
+    ArrayList<Integer> validValues = new ArrayList();
+    ArrayList<String> solutionOperators = new ArrayList();
 
     @FXML
     private Rectangle cardBox1;
@@ -259,7 +261,7 @@ public class FXMLDocumentController implements Initializable {
         
         for (int i = 0; i < cardsDrawn.size(); i++) {
             
-            validValues.add(cardsDrawn.get(i).substring(1));
+            validValues.add(Integer.parseInt(cardsDrawn.get(i).substring(1)));
             
         }
 
@@ -270,6 +272,8 @@ public class FXMLDocumentController implements Initializable {
         // Add to user game count and user results count
         cardCodes.clear();
         validValues.clear();
+        solutionText.clear();
+        userText.clear();
         // Run random number generator again
         
     }
@@ -301,5 +305,92 @@ public class FXMLDocumentController implements Initializable {
         setCardFaces(cardCodes);
         
     }
+
+    @FXML
+    private void findSolution(ActionEvent event) {
+        solutionFinder(validValues);
+    }
+
+    @FXML
+    private void redrawCards(ActionEvent event) {
+        endGame();
+        drawCards(cardCodes);
+    }
+
+    @FXML
+    private void verifyExpression(ActionEvent event) {
+    }
     
+    public void solutionFinder(ArrayList<Integer> values) {
+        
+        Integer result1 = values.get(0);
+        Integer result2, result3;
+        
+        outer:
+            for (int i = 0; i < 4; i++) {
+
+                solutionOperators.clear();
+                result1 = parseOperations(result1, i, values.get(1), solutionOperators);
+                for (int j = 0; j < 4; j++) {
+                    
+                    result2 = parseOperations(result1, j, values.get(2), solutionOperators);
+                    for (int k = 0; k < 4; k++) {
+                        
+                        result3 = parseOperations(result2, k, values.get(3), solutionOperators);
+                        if (result3 == 24)
+                            break outer;
+                        
+                        solutionOperators.remove(2);
+                        
+                    }
+                    solutionOperators.remove(1);
+                    
+                }
+
+            }
+        
+        if (solutionOperators.size() == 1)
+            solutionText.setText("No solution found");
+        else 
+            outputSolution(values, solutionOperators);
+        
+    }
+    
+    public Integer parseOperations(Integer total, int index, Integer operand, ArrayList<String> operators) {
+     
+        switch (index) {
+            
+            case 0:
+                total *= operand;
+                operators.add("*");
+                break;
+            case 1:
+                total /= operand;
+                operators.add("/");
+                break;
+            case 2:
+                total += operand;
+                operators.add("+");
+                break;
+            case 3:
+                total -=operand;
+                operators.add("-");
+                break;
+            
+        }
+        
+        return total;
+        
+    }
+    
+    public void outputSolution(ArrayList<Integer> values, ArrayList<String> operators) {
+        
+        solutionText.clear();
+        solutionText.setText("(((" + values.get(0) + " " + operators.get(0) + " "
+                + values.get(1) + ")" + " " + operators.get(1) + " " 
+                + values.get(2) + ")" + " " + operators.get(2) + " " 
+                + values.get(3) + ")");
+        
+    }
+        
 }
