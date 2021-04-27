@@ -17,24 +17,24 @@
       <Rectangle fx:id="cardBox2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="280.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0" />
       <Rectangle fx:id="cardBox3" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="540.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0" />
       <Rectangle fx:id="cardBox4" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" layoutX="800.0" layoutY="100.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0" />
-      <Label fx:id="userPrompt" layoutX="20.0" layoutY="483.0" text="Enter an expression:">
+      <Label id="userPrompt" fx:id="userPrompt" layoutX="20.0" layoutY="483.0" text="Enter an expression:">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Button fx:id="solveButton" layoutX="60.0" layoutY="25.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" text="Find solution" textAlignment="CENTER">
+      <Button id="solutionButton" fx:id="solveButton" layoutX="60.0" layoutY="25.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" styleClass="btn" text="Find solution" textAlignment="CENTER">
          <font>
-            <Font size="24.0" />
+            <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="refreshButton" layoutX="840.0" layoutY="25.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" text="Refresh" textAlignment="CENTER">
+      <Button id="refreshButton" fx:id="refreshButton" layoutX="840.0" layoutY="25.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" styleClass="btn" text="Refresh" textAlignment="CENTER">
          <font>
-            <Font size="24.0" />
+            <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="checkButton" layoutX="840.0" layoutY="475.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" text="Verify" textAlignment="CENTER">
+      <Button id="verifyButton" fx:id="checkButton" layoutX="840.0" layoutY="475.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" styleClass="btn" text="Verify" textAlignment="CENTER">
          <font>
-            <Font size="24.0" />
+            <Font size="20.0" />
          </font>
       </Button>
       <TextField fx:id="solutionText" layoutX="280.0" layoutY="25.0" maxHeight="50.0" maxWidth="510.0" minHeight="50.0" minWidth="510.0" prefHeight="50.0" prefWidth="510.0">

@@ -223,14 +223,12 @@ public class FXMLDocumentController implements Initializable {
 
             }
 
-            else if (Character.isDigit(input.charAt(i))) {
+            else if (Character.isDigit(input.charAt(i))) 
                 operands.add(Character.toString(input.charAt(i)));
-            }
-
-            else {
+            
+            else 
                 operators.add(Character.toString(input.charAt(i)));
-            }
-
+            
         }
         
     }
@@ -291,8 +289,10 @@ public class FXMLDocumentController implements Initializable {
             
             if (i == 0)
                 cardCodes.add(cardCode);
+            
             else if (i != 0 && !(cardCode.equals(cardCodes.get(i - 1))))
                 cardCodes.add(cardCode);
+            
             else
                 i--;
 

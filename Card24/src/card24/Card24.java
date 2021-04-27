@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 /**
@@ -30,6 +31,8 @@ public class Card24 extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);
+        TextField userText = (TextField)scene.lookup("#userText");
+        userText.requestFocus();
         
         stage.setScene(scene);
         stage.show();    

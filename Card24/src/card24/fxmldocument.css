@@ -1,3 +1,75 @@
+/*
+ * Capstone Group 3
+ * Dr. Alrajab
+ * BCS345 JAVA Programming
+ * 10 May 2021
+ * Semester Project (Card24)
+ * This file styles the Card24 program
+ */
+
+@font-face {
+    font-family: 'Sawarabi Gothic';
+    src: url('fonts/SawarabiGothic-Regular.ttf');
+}
+
 .mainFxmlClass {
     -fx-background-color: radial-gradient(center 535px 225px, radius 600px, #0d9a57, #023618);
+}
+
+.btn {
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, black, 8, 0.2, 0, -2);
+    -fx-font-family: 'Sawarabi Gothic';
+    -fx-text-fill: white;
+}
+
+.btn:hover, .btn:focused {
+    -fx-font-family: 'Sawarabi Gothic';
+    -fx-font-size: 20px;
+}
+
+#userPrompt {
+    -fx-text-fill: white;
+}
+
+#refreshButton, #solutionButton {
+    -fx-background-color: linear-gradient(black, hsb(0, 80%, 25%) 4%, 
+        hsb(0, 80%, 50%), hsb(0, 80%, 75%) 97%, white), 
+        hsb(0, 80%, 100%);
+    -fx-background-insets: 0, 3;
+}
+
+#refreshButton:hover, #refreshButton:focused, #solutionButton:hover, #solutionButton:focused {
+    -fx-background-color: linear-gradient(black, hsb(0, 80%, 5%) 4%, 
+        hsb(0, 80%, 30%), hsb(0, 80%, 55%) 97%, white), 
+        hsb(0, 80%, 55%);
+    -fx-background-insets: 0, 3;
+}
+
+#refreshButton:pressed, #solutionButton:pressed {
+    -fx-background-color: linear-gradient(black, hsb(0, 80%, 25%) 4%, 
+        hsb(0, 80%, 50%), hsb(0, 80%, 75%) 97%, white), 
+        hsb(0, 80%, 100%);
+    -fx-background-insets: 0, 1;
+}
+
+#verifyButton {
+    -fx-background-color: linear-gradient(black, hsb(0, 0%, 20%) 4%, 
+        hsb(0, 0%, 40%), hsb(0, 0%, 60%) 97%, white), 
+        hsb(0, 0%, 10%);
+    -fx-background-insets: 0, 3;
+}
+
+#verifyButton:hover, #verifyButton:focused {
+    -fx-background-color: linear-gradient(black, hsb(0, 0%, 0%) 4%, 
+        hsb(0, 0%, 20%), hsb(0, 0%, 40%) 97%, white), 
+        hsb(0, 0%, 50%);
+    -fx-background-insets: 0, 3;
+}
+
+#verifyButton:pressed {
+    -fx-background-color: linear-gradient(black, hsb(0, 0%, 20%) 4%, 
+        hsb(0, 0%, 40%), hsb(0, 0%, 60%) 97%, white), 
+        hsb(0, 0%, 10%);
+    -fx-background-insets: 0, 1;
 }
