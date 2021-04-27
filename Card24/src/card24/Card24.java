@@ -35,6 +35,7 @@ public class Card24 extends Application {
         userText.requestFocus();
         
         stage.setScene(scene);
+        stage.setTitle("Playing Card 24");
         stage.show();    
     
     }

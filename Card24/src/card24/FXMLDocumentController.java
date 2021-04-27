@@ -319,6 +319,7 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void verifyExpression(ActionEvent event) {
+        evaluateExpression(userText.getText());
     }
     
     public void solutionFinder(ArrayList<Integer> values) {
@@ -386,10 +387,10 @@ public class FXMLDocumentController implements Initializable {
     public void outputSolution(ArrayList<Integer> values, ArrayList<String> operators) {
         
         solutionText.clear();
-        solutionText.setText("(((" + values.get(0) + " " + operators.get(0) + " "
+        solutionText.setText("((" + values.get(0) + " " + operators.get(0) + " "
                 + values.get(1) + ")" + " " + operators.get(1) + " " 
                 + values.get(2) + ")" + " " + operators.get(2) + " " 
-                + values.get(3) + ")");
+                + values.get(3));
         
     }
         
