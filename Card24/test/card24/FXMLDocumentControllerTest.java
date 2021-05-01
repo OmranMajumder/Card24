@@ -109,7 +109,7 @@ public class FXMLDocumentControllerTest {
         assertEquals(expResult, result);
     }
     
-//    **UNEXPECTED FAILURES FOR testValidateParentheses2, 4, 5, and 6
+//    **UNEXPECTED FAILURES FOR testValidateParentheses2, 5, and 6
 //    ***REQUIRES FURTHER INVESTIGATION***
 
     @Test
