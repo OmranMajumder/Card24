@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.ResourceBundle;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +35,59 @@ public class FXMLDocumentController implements Initializable {
     ArrayList<String> cardCodes = new ArrayList();
     ArrayList<Double> validValues = new ArrayList();
     ArrayList<String> solutionOperators = new ArrayList();
+   
+    private int seconds, minutes = 0, hours = 0;
+    
+    AnimationTimer timer = new AnimationTimer() {
+            
+        private long lastTime = 0;
 
+        @Override
+        public void handle(long now) {
+
+            if (lastTime != 0) {
+
+                if (now > lastTime + 1000000000) {
+
+                    seconds++;
+                    if (seconds == 60) {
+                        
+                        minutes++;
+                        seconds = 0;
+                        
+                        if (minutes == 60) {
+                            
+                            hours++;
+                            minutes = 0;
+                            
+                        }
+                        
+                    }
+                        
+                    timerLabel.setText(String.format("Timer: %02d:%02d:%02d", 
+                        hours, minutes, seconds));
+                    lastTime = now;
+
+                }
+
+            }
+
+            else
+                lastTime = now;
+
+        }
+
+        @Override
+        public void stop() {
+
+            super.stop();
+            lastTime = 0;
+            seconds = 0;
+
+        }
+            
+    };
+    
     @FXML
     private Rectangle cardBox1;
     @FXML
@@ -55,6 +108,8 @@ public class FXMLDocumentController implements Initializable {
     private Button solveButton;
     @FXML
     private Button checkButton;
+    @FXML
+    private Label timerLabel;
     
     /**
      * Initializes the controller class.
@@ -63,6 +118,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         initializeCards();
+        timer.start();
         drawCards(cardCodes);
         test = removeSpaces(test);
         
