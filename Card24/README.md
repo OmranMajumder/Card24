@@ -1,19 +1,15 @@
 # Playing Card 24 Game
-___
 This Java application was designed using JavaFX and SceneBuilder. 
-
-### Getting Started
 ___
+### Getting Started
 It is recommended to create a new repository for any new project.
 
 We utilized JDK15 when developing this project on Apache Netbeans, which is an IDE (integrated development environment) software. 
-
+___
 ### Object of the game
-___
 Four cards will be randomly selected and provided on the screen. Using the cards provided, create a mathematical expression that equals 24.
-
-### Gameplay
 ___
+### Gameplay
 The values for each card are as follows: 
 > - Aces are worth 1  
 > - Number cards (2-10) are the same as their value shown  
