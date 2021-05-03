@@ -204,8 +204,48 @@ public class FXMLDocumentControllerTest {
     }
 
     @Test
-    public void testEvaluateParen() {
+    public void testEvaluateParen1() {
+        System.out.println("Evaluate Paren 1:");
+        String testInput = "1+9";
+        String expResult = "";
+        String result = instance.evaluateParen(testInput);
+        assertEquals(expResult, result);
     }
+    @Test
+    public void testEvaluateParen2() {
+        System.out.println("Evaluate Paren 2:");
+        String testInput = "(1+9)";
+        String expResult = "10";
+        String result = instance.evaluateParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testEvaluateParen3() {
+        System.out.println("Evaluate Paren 3:");
+        String testInput = "(1+9)+8";
+        String expResult = "10+8";
+        String result = instance.evaluateParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testEvaluateParen4() {
+        System.out.println("Evaluate Paren 4:");
+        String testInput = "((1+9)+8)";
+        String expResult = "(1+9)+8";
+        String result = instance.evaluateParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testEvaluateParen5() {
+        System.out.println("Evaluate Paren 5:");
+        String testInput = "(1+9)+8*(2)";
+        String expResult = "(1+9)+8*(2)";
+        String result = instance.evaluateParen(testInput);
+        assertEquals(expResult, result);
+    }
+    
+//    **UNEXPECTED FAILURES FOR testEvaluateParen1, 4, and 5**
+//    **Test cases 1 and 4 cause ERROR: out of bounds for length 3**
 
     @Test
     public void testEvaluateExpression() {
