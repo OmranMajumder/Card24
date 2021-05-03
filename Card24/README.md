@@ -1,5 +1,4 @@
 # Playing Card 24 Game
-####_Contributors: _
 ___
 This Java application was designed using JavaFX and SceneBuilder. 
 
@@ -15,13 +14,14 @@ Four cards will be randomly selected and provided on the screen. Using the cards
 
 ### Gameplay
 ___
-*The values for each card are as follows: 
->*Aces are worth 1
->*Number cards (2-10) are the same as their value shown
->*Jacks are worth 11
->*Queens are worth 12
->*Kings are worth 13
-*All four card values should be used, but each number can only be used once in the expression.
-*Card values can be added, subtracted, multiplied, or divided. 
-    *_Mathematical operators can be used more than once, but **all operators do not need to be used._**
-    *_Parenthesis can be used in your expression to signify order of precedence._
+The values for each card are as follows: 
+> - Aces are worth 1  
+> - Number cards (2-10) are the same as their value shown  
+> - Jacks are worth 11  
+> - Queens are worth 12  
+> - Kings are worth 13  
+  
+- All four card values should be used, but each number can only be used once in the expression.  
+- Card values can be added, subtracted, multiplied, or divided.  
+   -*Mathematical operators can be used more than once, but ***all operators do not need to be used***.*  
+   -*Parenthesis can be used in your expression to signify order of precedence.*
