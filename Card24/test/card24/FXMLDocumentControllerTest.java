@@ -207,7 +207,7 @@ public class FXMLDocumentControllerTest {
     public void testEvaluateParen1() {
         System.out.println("Evaluate Paren 1:");
         String testInput = "1+9";
-        String expResult = "";
+        String expResult = "10";
         String result = instance.evaluateParen(testInput);
         assertEquals(expResult, result);
     }
@@ -248,9 +248,58 @@ public class FXMLDocumentControllerTest {
 //    **Test cases 1 and 4 cause ERROR: out of bounds for length 3**
 
     @Test
-    public void testEvaluateExpression() {
+    public void testEvaluateExpression1() {
+        System.out.println("Evaluate Expression 1:");
+        String testInput = "1+9";
+        String expResult = "10";
+        String result = instance.evaluateExpression(testInput);
+        assertEquals(expResult, result);
     }
-
+    @Test
+    public void testEvaluateExpression2() {
+        System.out.println("Evaluate Expression 2:");
+        String testInput = "(1+9)";
+        String expResult = "10";
+        String result = instance.evaluateExpression(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testEvaluateExpression3() {
+        System.out.println("Evaluate Expression 3:");
+        String testInput = "5*6";
+        String expResult = "30";
+        String result = instance.evaluateExpression(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testEvaluateExpression4() {
+        System.out.println("Evaluate Expression 4:");
+        String testInput = "(1+9)*4";
+        String expResult = "40";
+        String result = instance.evaluateExpression(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testEvaluateExpression5() {
+        System.out.println("Evaluate Expression 5:");
+        String testInput = "((1+9)*4)/8";
+        String expResult = "5";
+        String result = instance.evaluateExpression(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testEvaluateExpression6() {
+        System.out.println("Evaluate Expression 6:");
+        String testInput = "(((1+9)*4)/8)+1";
+        String expResult = "6";
+        String result = instance.evaluateExpression(testInput);
+        assertEquals(expResult, result);
+    }
+    
+//    **UNEXPECTED FAILURES FOR testEvaluateExpression5, and 6**
+//    **testEvaluateExpression5 - ERROR: Index 3 out of bounds for length 3**    
+//    **testEvaluateExpression6 - ERROR: Index 4 out of bounds for length 4** 
+    
     @Test
     public void testSolveArithmetic() {
     }
