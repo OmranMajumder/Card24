@@ -24,8 +24,8 @@ public class FXMLDocumentControllerTest {
     }
 
     @Test
-    public void testRemoveSpaces() {
-        System.out.println("Remove Spaces:");
+    public void testRemoveSpaces1() {
+        System.out.println("Remove Spaces1:");
         String testInput = "1";
         String expResult = "1";
         String result = instance.removeSpaces(testInput);
@@ -56,10 +56,18 @@ public class FXMLDocumentControllerTest {
         String result = instance.removeSpaces(testInput);
         assertEquals(expResult, result);
     }
+    @Test
+    public void testRemoveSpaces5() {
+        System.out.println("Remove Spaces 5:");
+        String testInput = " 1 ";
+        String expResult = "1";
+        String result = instance.removeSpaces(testInput);
+        assertEquals(expResult, result);
+    }
 
     @Test
-    public void testValidateParentheses() {
-        System.out.println("Validate Parentheses:");
+    public void testValidateParentheses1() {
+        System.out.println("Validate Parentheses 1:");
         String testInput = "1";
         Boolean expResult = true;
         Boolean result = instance.validateParentheses(testInput);
@@ -110,14 +118,89 @@ public class FXMLDocumentControllerTest {
     }
     
 //    **UNEXPECTED FAILURES FOR testValidateParentheses2, 5, and 6
-//    ***REQUIRES FURTHER INVESTIGATION***
+//    ***Modified Line85 in Controller file - Removed -1 after input.length()***
+//    The previous code was not iterating correctly over the entire input length
 
     @Test
-    public void testFindLastLeftParen() {
+    public void testFindLastLeftParen1() {
+        System.out.println("Find Last Left Paren 1:");
+        String testInput = "1";
+        int expResult = -1;
+        int result = instance.findLastLeftParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testFindLastLeftParen2() {
+        System.out.println("Find Last Left Paren 2:");
+        String testInput = "1+9";
+        int expResult = -1;
+        int result = instance.findLastLeftParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testFindLastLeftParen3() {
+        System.out.println("Find Last Left Paren 3:");
+        String testInput = "(1+9)";
+        int expResult = 0;
+        int result = instance.findLastLeftParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testFindLastLeftParen4() {
+        System.out.println("Find Last Left Paren 4:");
+        String testInput = "((1+9)+8)";
+        int expResult = 1;
+        int result = instance.findLastLeftParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testFindLastLeftParen5() {
+        System.out.println("Find Last Left Paren 5:");
+        String testInput = "((1+9)+8*(2))";
+        int expResult = 9;
+        int result = instance.findLastLeftParen(testInput);
+        assertEquals(expResult, result);
     }
 
     @Test
-    public void testFindFirstRightParen() {
+    public void testFindFirstRightParen1() {
+        System.out.println("Find First Right Paren 1:");
+        String testInput = "1";
+        int expResult = -1;
+        int result = instance.findFirstRightParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testFindFirstRightParen2() {
+        System.out.println("Find First Right Paren 2:");
+        String testInput = "1+9";
+        int expResult = -1;
+        int result = instance.findFirstRightParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testFindFirstRightParen3() {
+        System.out.println("Find First Right Paren 3:");
+        String testInput = "(1+9)";
+        int expResult = 4;
+        int result = instance.findFirstRightParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testFindFirstRightParen4() {
+        System.out.println("Find First Right Paren 4:");
+        String testInput = "((1+9)+8)";
+        int expResult = 8;
+        int result = instance.findFirstRightParen(testInput);
+        assertEquals(expResult, result);
+    }
+    @Test
+    public void testFindFirstRightParen5() {
+        System.out.println("Find First Right Paren 5:");
+        String testInput = "((1+9)+8*(2))";
+        int expResult = 12;
+        int result = instance.findFirstRightParen(testInput);
+        assertEquals(expResult, result);
     }
 
     @Test

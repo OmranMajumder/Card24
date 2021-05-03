@@ -82,7 +82,7 @@ public class FXMLDocumentController implements Initializable {
         
         int rightCount = 0, leftCount = 0;
         
-        for (int i = 0; i < input.length() - 1; i++) {
+        for (int i = 0; i < input.length(); i++) {
            
             if (input.charAt(i) == '(') 
                 leftCount++;
