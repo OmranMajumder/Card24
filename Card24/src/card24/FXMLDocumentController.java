@@ -153,10 +153,11 @@ public class FXMLDocumentController implements Initializable {
         int rightCount = 0, leftCount = 0;
         
         // iterates through string counting left and right parenthesese
-        for (int i = 0; i < input.length() - 1; i++) {
+        for (int i = 0; i < input.length(); i++) {
             
             // increments left and right parentheses counters if parentheses
             // are detected
+
             if (input.charAt(i) == '(') 
                 leftCount++;
             
