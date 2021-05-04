@@ -95,7 +95,7 @@ public class FXMLDocumentControllerTest {
     public void testValidateParentheses4() {
         System.out.println("Validate Parentheses 4:");
         String testInput = "(13+(9)+8";
-        Boolean expResult = true;
+        Boolean expResult = false;
         Boolean result = instance.validateParentheses(testInput);
         assertEquals(expResult, result);
         //Planned failure: uneven number of () - 3 included
@@ -116,10 +116,6 @@ public class FXMLDocumentControllerTest {
         Boolean result = instance.validateParentheses(testInput);
         assertEquals(expResult, result);
     }
-    
-//    **UNEXPECTED FAILURES FOR testValidateParentheses2, 5, and 6
-//    ***Modified Line85 in Controller file - Removed -1 after input.length()***
-//    The previous code was not iterating correctly over the entire input length
 
     @Test
     public void testFindLastLeftParen1() {
@@ -211,6 +207,7 @@ public class FXMLDocumentControllerTest {
         String result = instance.evaluateParen(testInput);
         assertEquals(expResult, result);
     }
+    //Planned failure: no () included, will not call function
     @Test
     public void testEvaluateParen2() {
         System.out.println("Evaluate Paren 2:");
@@ -239,12 +236,12 @@ public class FXMLDocumentControllerTest {
     public void testEvaluateParen5() {
         System.out.println("Evaluate Paren 5:");
         String testInput = "(1+9)+8*(2)";
-        String expResult = "(1+9)+8*(2)";
+        String expResult = "(1+9)+8*2";
         String result = instance.evaluateParen(testInput);
         assertEquals(expResult, result);
     }
     
-//    **UNEXPECTED FAILURES FOR testEvaluateParen1, 4, and 5**
+//    **UNEXPECTED FAILURES FOR testEvaluateParen1, 4**
 //    **Test cases 1 and 4 cause ERROR: out of bounds for length 3**
 
     @Test
