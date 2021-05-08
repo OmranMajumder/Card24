@@ -157,6 +157,7 @@ public class FXMLDocumentController implements Initializable {
             
             // increments left and right parentheses counters if parentheses
             // are detected
+
             if (input.charAt(i) == '(') 
                 leftCount++;
             
