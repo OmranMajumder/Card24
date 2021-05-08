@@ -27,8 +27,6 @@ import javafx.scene.shape.Rectangle;
  */
 public class FXMLDocumentController implements Initializable {
     
-    String test = " (4 + 2)* 3 + 2";
-    
     // declares and instantiates array lists for card, card codes, valid values, 
     // and solution operators
     ArrayList<Rectangle> cards = new ArrayList();
@@ -117,13 +115,10 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         initializeCards();
+        initializeTextFields();
         timer.start();
         drawCards(cardCodes);
-        test = removeSpaces(test);
-        
-        System.out.println(test);
-        System.out.println(evaluateExpression(test));
-        
+
     }    
     
     // adds card rectangle objects to array list of rectangles
@@ -240,36 +235,50 @@ public class FXMLDocumentController implements Initializable {
         
     }
     
-    // evaluates expression
-    protected String evaluateExpression(String input) {
+    // evaluates user input expression
+    protected String evaluateExpression(String input) throws IllegalArgumentException {
         
+        // removes spaces from input
+        input = removeSpaces(input);
+        
+        try {
         // determines whether expression requires parenthetical evaluation
-        if (input.contains("(")) {
-            
-            // continues to evaluate parenthetical expressions if detected
-            input = evaluateParen(input);
-            input = evaluateExpression(input);
+            if (input.contains("(")) {
+
+                // continues to evaluate parenthetical expressions if detected
+                input = evaluateParen(input);
+                input = evaluateExpression(input);
+
+            }
+
+            else if (input.contains("*") || input.contains("/")
+                    || input.contains("+") || input.contains("-")) {
+
+                // declares and instantiates array lists for operands and operators
+                ArrayList<String> operands = new ArrayList<String>();
+                ArrayList<String> operators = new ArrayList<String>();
+
+                while (input.contains("*") || input.contains("/") 
+                        || input.contains("+") || input.contains("-")
+                        && !(Double.parseDouble(input) < 0)) {
+
+                    sortOperatorsOperands(input, operators, operands);
+                    input = solveArithmetic(operators, operands);
+
+                }
+
+            }
             
         }
         
-        else {
+        catch (IllegalArgumentException e) {
             
-            // declares and instantiates array lists for operands and operators
-            ArrayList<String> operands = new ArrayList<String>();
-            ArrayList<String> operators = new ArrayList<String>();
-        
-            while (input.contains("*") || input.contains("/") 
-                    || input.contains("+") || input.contains("-")) {
-
-                sortOperatorsOperands(input, operators, operands);
-                input = solveArithmetic(operators, operands);
-
-            }
-            // VALIDATE DOUBLE
+            solutionText.setText("Invalid Entry! Try Again.");
+            
         }
         
         return input;
-         
+        
     }
     
     // sorts operators and operands into array lists
@@ -279,11 +288,30 @@ public class FXMLDocumentController implements Initializable {
         // respective array lists
         for (int i = 0; i < input.length(); i++) {
             
+            if (i == 0 && input.charAt(i) == '-') {
+                
+                operands.set(i, Character.toString(input.charAt(i)));
+                
+            }
+            
+            else if (i > 0 && input.charAt(i) 
+                    == '-') {
+                
+                if (input.charAt(i - 1) == '*' || input.charAt(i - 1) == '/' 
+                        || input.charAt(i - 1) == '+' || input.charAt(i - 1) == '-')     
+                    operands.set(i, Character.toString(input.charAt(i)));
+                
+                else
+                    operators.add(Character.toString(input.charAt(i)));
+                
+            }
+            
             // checks for multiple digit and decimal operands
-            if (i > 0 && (Character.isDigit(input.charAt(i))
+            else if (i > 0 && (Character.isDigit(input.charAt(i))
                     || input.charAt(i) == '.')
                     && (Character.isDigit(input.charAt(i - 1))
-                    || input.charAt(i - 1) == '.')) {
+                    || input.charAt(i - 1) == '.' 
+                    || operands.get(operands.size() - 1).equals("-"))) {
                 
                 // appends current character to previous operand
                 operands.set(operands.size() - 1, operands.get(operands.size() - 1) 
@@ -317,10 +345,12 @@ public class FXMLDocumentController implements Initializable {
                 
                 // calculates product or quotient
                 if (operators.get(i).equals("*"))
-                    result = Double.parseDouble(operands.get(i)) * Double.parseDouble(operands.get(i + 1));
+                    result = Double.parseDouble(operands.get(i)) 
+                            * Double.parseDouble(operands.get(i + 1));
 
                 else
-                    result = Double.parseDouble(operands.get(i)) / Double.parseDouble(operands.get(i + 1));
+                    result = Double.parseDouble(operands.get(i)) 
+                            / Double.parseDouble(operands.get(i + 1));
                 
                 // replaces operand in array list with result
                 operands.set(i + 1, result.toString());
@@ -332,10 +362,12 @@ public class FXMLDocumentController implements Initializable {
                 
                 // calculates sum or difference
                 if (operators.get(i).equals("+"))
-                    result = Double.parseDouble(operands.get(i)) + Double.parseDouble(operands.get(i + 1));
+                    result = Double.parseDouble(operands.get(i)) 
+                            + Double.parseDouble(operands.get(i + 1));
 
                 else
-                    result = Double.parseDouble(operands.get(i)) - Double.parseDouble(operands.get(i + 1));
+                    result = Double.parseDouble(operands.get(i)) 
+                            - Double.parseDouble(operands.get(i + 1));
                 
                 // replaces operand in array list with result
                 operands.set(i + 1, result.toString());
@@ -512,6 +544,7 @@ public class FXMLDocumentController implements Initializable {
         
         // clears existing solution text and outputs solution if found
         solutionText.clear();
+        solutionText.setStyle("-fx-text-inner-color: black");
         solutionText.setText(String.format("((%.0f %s %.0f) %s %.0f) %s %.0f", values.get(0), 
                 operators.get(0), values.get(1), operators.get(1), values.get(2),
                 operators.get(2), values.get(3))); 
@@ -539,12 +572,38 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     protected void verifyExpression(ActionEvent event) {
         
-        evaluateExpression(userText.getText());
+        try{
+
+            String result = evaluateExpression(userText.getText());
+
+            // changes solution text color if correct or incorrect
+            if (Math.abs(Double.parseDouble(result) - 24.0) < 0.00001){
+                solutionText.setStyle("-fx-text-inner-color: green");
+                solutionText.setText("Result = 24!");
+            } 
+            
+            else{
+                solutionText.setStyle("-fx-text-inner-color: red");
+                solutionText.setText("Result is not 24. Try again");
+            }
+        }
+        
+        catch (IllegalArgumentException e){
+            solutionText.setText("Invalid Entry. Try again.");
+        }
+    
         
     }
 
     @FXML
     private void saveLog(ActionEvent event) {
+    }
+    
+    protected void initializeTextFields() {
+        
+        // ouputs user prompt in solution text field
+        solutionText.setText("Valid Characters: 0-9 * / + - ( )");
+
     }
     
 }
