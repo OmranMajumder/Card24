@@ -7,6 +7,7 @@ package card24;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.animation.AnimationTimer;
@@ -32,6 +33,7 @@ public class FXMLDocumentController implements Initializable {
     ArrayList<Rectangle> cards = new ArrayList();
     ArrayList<String> cardCodes = new ArrayList();
     ArrayList<Double> validValues = new ArrayList();
+    ArrayList<Double> inputValues = new ArrayList();
     ArrayList<String> solutionOperators = new ArrayList();
    
     private int seconds;
@@ -255,15 +257,22 @@ public class FXMLDocumentController implements Initializable {
                     || input.contains("+") || input.contains("-")) {
 
                 // declares and instantiates array lists for operands and operators
-                ArrayList<String> operands = new ArrayList<String>();
-                ArrayList<String> operators = new ArrayList<String>();
+                ArrayList<String> operands = new ArrayList<>();
+                ArrayList<String> operators = new ArrayList<>();
 
                 while (input.contains("*") || input.contains("/") 
-                        || input.contains("+") || input.contains("-")
-                        && !(Double.parseDouble(input) < 0)) {
-
+                        || input.contains("+") || input.contains("-")) {
+                        
                     sortOperatorsOperands(input, operators, operands);
-                    input = solveArithmetic(operators, operands);
+                    
+                    if (operands.get(operands.size() - 1).equals(operands.get(operands.size() - 2))) {
+                        
+                        break;
+                        
+                    }
+                    
+                    else
+                        input = solveArithmetic(operators, operands);
 
                 }
 
@@ -290,7 +299,7 @@ public class FXMLDocumentController implements Initializable {
             
             if (i == 0 && input.charAt(i) == '-') {
                 
-                operands.set(i, Character.toString(input.charAt(i)));
+                operands.add(Character.toString(input.charAt(i)));
                 
             }
             
@@ -299,7 +308,7 @@ public class FXMLDocumentController implements Initializable {
                 
                 if (input.charAt(i - 1) == '*' || input.charAt(i - 1) == '/' 
                         || input.charAt(i - 1) == '+' || input.charAt(i - 1) == '-')     
-                    operands.set(i, Character.toString(input.charAt(i)));
+                    operands.add(Character.toString(input.charAt(i)));
                 
                 else
                     operators.add(Character.toString(input.charAt(i)));
@@ -427,6 +436,8 @@ public class FXMLDocumentController implements Initializable {
             validValues.add(Double.parseDouble(cardsDrawn.get(i).substring(1)));
             
         }
+        
+        Collections.sort(validValues);
 
     }    
     
@@ -453,6 +464,7 @@ public class FXMLDocumentController implements Initializable {
         // Add to user game count and user results count
         cardCodes.clear();
         validValues.clear();
+        inputValues.clear();
         solutionText.clear();
         userText.clear();
         // Run random number generator again
@@ -499,8 +511,12 @@ public class FXMLDocumentController implements Initializable {
             }
         
         // outputs message if no solution is found
-        if (solutionOperators.size() == 1)
+        if (solutionOperators.size() == 1) {
+           
+            solutionText.setStyle("-fx-text-inner-color: black");
             solutionText.setText("No solution found");
+            
+        }
         
         // outputs formatted solution
         else 
@@ -573,25 +589,92 @@ public class FXMLDocumentController implements Initializable {
     protected void verifyExpression(ActionEvent event) {
         
         try{
-
-            String result = evaluateExpression(userText.getText());
-
-            // changes solution text color if correct or incorrect
-            if (Math.abs(Double.parseDouble(result) - 24.0) < 0.00001){
-                solutionText.setStyle("-fx-text-inner-color: green");
-                solutionText.setText("Result = 24!");
-            } 
             
-            else{
-                solutionText.setStyle("-fx-text-inner-color: red");
-                solutionText.setText("Result is not 24. Try again");
+            parseInputValues(userText.getText());
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            if (validValues.equals(inputValues)) {
+            
+                String result = evaluateExpression(userText.getText());
+                
+                if (result.contains("*") || result.contains("/")
+                    || result.contains("+") || result.contains("-")) {
+                    
+                    result = evaluateExpression(result);
+                    
+                }
+
+                // changes solution text color if correct or incorrect
+                if (Math.abs(Double.parseDouble(result) - 24.0) < 0.00001){
+
+                    solutionText.setStyle("-fx-text-inner-color: green");
+                    solutionText.setText("Correct! Expression equals 24!");
+
+                } 
+
+                else{
+
+                    solutionText.setStyle("-fx-text-inner-color: red");
+                    solutionText.setText("Try again. Expression not 24.");
+
+                }
+                
             }
+            
+            else {
+                
+                solutionText.setStyle("-fx-text-inner-color: red");
+                solutionText.setText("Invalid Entry. Incorrect card values!");
+                
+            }
+            
         }
         
         catch (IllegalArgumentException e){
+            
+            solutionText.setStyle("-fx-text-inner-color: red");
             solutionText.setText("Invalid Entry. Try again.");
+            
         }
     
+        
+    }
+    
+    private void parseInputValues(String input) {
+        
+        for (int i = 0; i < input.length(); i++) {
+            
+            if (i == 0) {
+                
+                if (Character.isDigit(input.charAt(i))) {
+                
+                    inputValues.add(Double.parseDouble(Character.toString(input.charAt(i))));
+                
+                }
+            }
+            
+            else {
+                if (Character.isDigit(input.charAt(i)) 
+                        && Character.isDigit(input.charAt(i - 1))) {
+                
+                    inputValues.set(inputValues.size() - 1, 
+                            inputValues.get(inputValues.size() - 1) * 10.0
+                                    + Double.parseDouble(Character.toString(input.charAt(i))));
+                
+                }
+                
+                else if (Character.isDigit(input.charAt(i))) {
+                        
+                    inputValues.add(Double.parseDouble(Character.toString(input.charAt(i))));
+                    
+                }
+            
+            }
+            
+            
+            
+        }
+        
+        Collections.sort(inputValues);
         
     }
 
