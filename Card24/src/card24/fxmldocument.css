@@ -12,8 +12,20 @@
     src: url('fonts/SawarabiGothic-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'Calculator';
+    src: url('fonts/Calculator.ttf');
+}
+
 .mainFxmlClass {
     -fx-background-color: radial-gradient(center 535px 225px, radius 600px, #0d9a57, #023618);
+}
+
+#timer {
+    -fx-font-family: 'Calculator';
+    -fx-text-fill: lime;
+    -fx-font-size: 24pt;
+    -fx-font-weight: bolder;
 }
 
 .btn {

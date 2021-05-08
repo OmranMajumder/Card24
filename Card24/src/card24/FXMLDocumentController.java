@@ -36,50 +36,45 @@ public class FXMLDocumentController implements Initializable {
     ArrayList<Double> validValues = new ArrayList();
     ArrayList<String> solutionOperators = new ArrayList();
    
-    private int seconds, minutes = 0, hours = 0;
+    private int seconds;
     
+    // declares and instantiates animation timer for background-running timer
     AnimationTimer timer = new AnimationTimer() {
-            
+        
+        // declares and initializes current time
         private long lastTime = 0;
-
+        
+        // defines abstract method to start timer
         @Override
         public void handle(long now) {
-
+            
             if (lastTime != 0) {
-
+                
+                // enters condition if difference between now and last time
+                // is greater than 1 second
                 if (now > lastTime + 1000000000) {
-
+                    
+                    // increments seconds
                     seconds++;
-                    if (seconds == 60) {
-                        
-                        minutes++;
-                        seconds = 0;
-                        
-                        if (minutes == 60) {
-                            
-                            hours++;
-                            minutes = 0;
-                            
-                        }
-                        
-                    }
-                        
-                    timerLabel.setText(String.format("Timer: %02d:%02d:%02d", 
-                        hours, minutes, seconds));
+                    
+                    // outputs formatted timer string
+                    timerLabel.setText(String.format("%02d:%02d:%02d", 
+                        seconds / 3600, seconds / 60, seconds % 60));
                     lastTime = now;
 
                 }
 
             }
-
+            
             else
                 lastTime = now;
 
         }
-
+        
+        // defines abstract method to stop timer
         @Override
         public void stop() {
-
+            
             super.stop();
             lastTime = 0;
             seconds = 0;
@@ -110,6 +105,10 @@ public class FXMLDocumentController implements Initializable {
     private Button checkButton;
     @FXML
     private Label timerLabel;
+    @FXML
+    private Rectangle timerBox;
+    @FXML
+    private Button saveLogButton;
     
     /**
      * Initializes the controller class.
@@ -542,6 +541,10 @@ public class FXMLDocumentController implements Initializable {
         
         evaluateExpression(userText.getText());
         
+    }
+
+    @FXML
+    private void saveLog(ActionEvent event) {
     }
     
 }
