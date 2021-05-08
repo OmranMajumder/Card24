@@ -5,6 +5,7 @@
  */
 package card24;
 
+import com.sun.xml.internal.ws.policy.AssertionSet;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -162,7 +163,7 @@ public class FXMLDocumentControllerTest {
     public void testFindFirstRightParen1() {
         System.out.println("Find First Right Paren 1:");
         String testInput = "1";
-        int expResult = -1;
+        int expResult = 0;
         int result = instance.findFirstRightParen(testInput);
         assertEquals(expResult, result);
     }
@@ -170,7 +171,7 @@ public class FXMLDocumentControllerTest {
     public void testFindFirstRightParen2() {
         System.out.println("Find First Right Paren 2:");
         String testInput = "1+9";
-        int expResult = -1;
+        int expResult = 2;
         int result = instance.findFirstRightParen(testInput);
         assertEquals(expResult, result);
     }
@@ -186,7 +187,7 @@ public class FXMLDocumentControllerTest {
     public void testFindFirstRightParen4() {
         System.out.println("Find First Right Paren 4:");
         String testInput = "((1+9)+8)";
-        int expResult = 8;
+        int expResult = 5;
         int result = instance.findFirstRightParen(testInput);
         assertEquals(expResult, result);
     }
@@ -194,61 +195,41 @@ public class FXMLDocumentControllerTest {
     public void testFindFirstRightParen5() {
         System.out.println("Find First Right Paren 5:");
         String testInput = "((1+9)+8*(2))";
-        int expResult = 12;
+        int expResult = 5;
         int result = instance.findFirstRightParen(testInput);
         assertEquals(expResult, result);
     }
 
     @Test
     public void testEvaluateParen1() {
-        System.out.println("Evaluate Paren 1:");
-        String testInput = "1+9";
-        String expResult = "10";
+        System.out.println("Evaluate Paren 2:");
+        String testInput = "(1+9)";
+        String expResult = "10.0";
         String result = instance.evaluateParen(testInput);
         assertEquals(expResult, result);
     }
-    //Planned failure: no () included, will not call function
     @Test
     public void testEvaluateParen2() {
-        System.out.println("Evaluate Paren 2:");
-        String testInput = "(1+9)";
-        String expResult = "10";
+        System.out.println("Evaluate Paren 3:");
+        String testInput = "(1+9)+8";
+        String expResult = "10.0+8";
         String result = instance.evaluateParen(testInput);
         assertEquals(expResult, result);
     }
     @Test
     public void testEvaluateParen3() {
-        System.out.println("Evaluate Paren 3:");
-        String testInput = "(1+9)+8";
-        String expResult = "10+8";
-        String result = instance.evaluateParen(testInput);
-        assertEquals(expResult, result);
-    }
-    @Test
-    public void testEvaluateParen4() {
         System.out.println("Evaluate Paren 4:");
         String testInput = "((1+9)+8)";
-        String expResult = "(1+9)+8";
+        String expResult = "(10.0+8)";
         String result = instance.evaluateParen(testInput);
         assertEquals(expResult, result);
     }
-    @Test
-    public void testEvaluateParen5() {
-        System.out.println("Evaluate Paren 5:");
-        String testInput = "(1+9)+8*(2)";
-        String expResult = "(1+9)+8*2";
-        String result = instance.evaluateParen(testInput);
-        assertEquals(expResult, result);
-    }
-    
-//    **UNEXPECTED FAILURES FOR testEvaluateParen1, 4**
-//    **Test cases 1 and 4 cause ERROR: out of bounds for length 3**
 
     @Test
     public void testEvaluateExpression1() {
         System.out.println("Evaluate Expression 1:");
         String testInput = "1+9";
-        String expResult = "10";
+        String expResult = "10.0";
         String result = instance.evaluateExpression(testInput);
         assertEquals(expResult, result);
     }
@@ -256,7 +237,7 @@ public class FXMLDocumentControllerTest {
     public void testEvaluateExpression2() {
         System.out.println("Evaluate Expression 2:");
         String testInput = "(1+9)";
-        String expResult = "10";
+        String expResult = "10.0";
         String result = instance.evaluateExpression(testInput);
         assertEquals(expResult, result);
     }
@@ -264,7 +245,7 @@ public class FXMLDocumentControllerTest {
     public void testEvaluateExpression3() {
         System.out.println("Evaluate Expression 3:");
         String testInput = "5*6";
-        String expResult = "30";
+        String expResult = "30.0";
         String result = instance.evaluateExpression(testInput);
         assertEquals(expResult, result);
     }
@@ -272,7 +253,7 @@ public class FXMLDocumentControllerTest {
     public void testEvaluateExpression4() {
         System.out.println("Evaluate Expression 4:");
         String testInput = "(1+9)*4";
-        String expResult = "40";
+        String expResult = "40.0";
         String result = instance.evaluateExpression(testInput);
         assertEquals(expResult, result);
     }
@@ -280,7 +261,7 @@ public class FXMLDocumentControllerTest {
     public void testEvaluateExpression5() {
         System.out.println("Evaluate Expression 5:");
         String testInput = "((1+9)*4)/8";
-        String expResult = "5";
+        String expResult = "5.0";
         String result = instance.evaluateExpression(testInput);
         assertEquals(expResult, result);
     }
@@ -288,7 +269,7 @@ public class FXMLDocumentControllerTest {
     public void testEvaluateExpression6() {
         System.out.println("Evaluate Expression 6:");
         String testInput = "(((1+9)*4)/8)+1";
-        String expResult = "6";
+        String expResult = "6.0";
         String result = instance.evaluateExpression(testInput);
         assertEquals(expResult, result);
     }

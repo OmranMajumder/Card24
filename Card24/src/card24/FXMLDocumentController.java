@@ -128,7 +128,7 @@ public class FXMLDocumentController implements Initializable {
     }    
     
     // adds card rectangle objects to array list of rectangles
-    private void initializeCards() {
+    protected void initializeCards() {
         
         cards.add(cardBox1);
         cards.add(cardBox2);
@@ -274,7 +274,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // sorts operators and operands into array lists
-    private void sortOperatorsOperands(String input, ArrayList<String> operators, ArrayList<String> operands) {
+    protected void sortOperatorsOperands(String input, ArrayList<String> operators, ArrayList<String> operands) {
         
         // iterates through input string and adds operators and operands to
         // respective array lists
@@ -305,7 +305,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // solves arithmetic expressions and returns result as string
-    private String solveArithmetic(ArrayList<String> operators, ArrayList<String> operands) {
+    protected String solveArithmetic(ArrayList<String> operators, ArrayList<String> operands) {
         
         // declares and initializes variable for arithmetic result
         Double result = 0.0;
@@ -350,7 +350,7 @@ public class FXMLDocumentController implements Initializable {
         
     }
     
-    public void drawCards(ArrayList<String> cardCodes) {
+    protected void drawCards(ArrayList<String> cardCodes) {
         
         // declares variables for suit, card value, and combined string card code
         Integer suit, cardValue;
@@ -387,7 +387,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // stores card values in array list of valid values
-    private void storeCardValues(ArrayList<String> cardsDrawn) {
+    protected void storeCardValues(ArrayList<String> cardsDrawn) {
         
         // iterates through cards drawn
         for (int i = 0; i < cardsDrawn.size(); i++) {
@@ -400,7 +400,7 @@ public class FXMLDocumentController implements Initializable {
     }    
     
     // sets card image backgrounds of rectangle objects
-    private void setCardFaces(ArrayList<String> cardsDrawn) {
+    protected void setCardFaces(ArrayList<String> cardsDrawn) {
         
         // iterates through array list of cards drawn
         for (int i = 0; i < cardsDrawn.size(); i++) {
@@ -417,7 +417,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // resets array lists and text fields when game is ended
-    private void endGame() {
+    protected void endGame() {
         
         // Add to user game count and user results count
         cardCodes.clear();
@@ -429,7 +429,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // generates possible solution for set of card values
-    public void solutionFinder(ArrayList<Double> values) {
+    protected void solutionFinder(ArrayList<Double> values) {
         
         // declares variables for intermediate calculations
         Double result0 = values.get(0);
@@ -478,7 +478,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // evaluates solution finder arithmetic operations
-    public Double parseOperations(Double total, int index, Double operand, ArrayList<String> operators) {
+    protected Double parseOperations(Double total, int index, Double operand, ArrayList<String> operators) {
         
         // determines arithmetic operation
         switch (index) {
@@ -509,7 +509,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // outputs formatted solution to solution text field
-    public void outputSolution(ArrayList<Double> values, ArrayList<String> operators) {
+    protected void outputSolution(ArrayList<Double> values, ArrayList<String> operators) {
         
         // clears existing solution text and outputs solution if found
         solutionText.clear();
@@ -521,7 +521,7 @@ public class FXMLDocumentController implements Initializable {
     
     // imported button method for finding solution
     @FXML
-    private void findSolution(ActionEvent event) {
+    protected void findSolution(ActionEvent event) {
         
         solutionFinder(validValues);
         
@@ -529,7 +529,7 @@ public class FXMLDocumentController implements Initializable {
     
     // imported button method to refresh cards
     @FXML
-    private void redrawCards(ActionEvent event) {
+    protected void redrawCards(ActionEvent event) {
         
         endGame();
         drawCards(cardCodes);
@@ -538,7 +538,7 @@ public class FXMLDocumentController implements Initializable {
     
     // imported button method to verify expression
     @FXML
-    private void verifyExpression(ActionEvent event) {
+    protected void verifyExpression(ActionEvent event) {
         
         evaluateExpression(userText.getText());
         
