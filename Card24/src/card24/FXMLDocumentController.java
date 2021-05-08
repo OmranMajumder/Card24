@@ -153,7 +153,7 @@ public class FXMLDocumentController implements Initializable {
         int rightCount = 0, leftCount = 0;
         
         // iterates through string counting left and right parenthesese
-        for (int i = 0; i < input.length() - 1; i++) {
+        for (int i = 0; i < input.length(); i++) {
             
             // increments left and right parentheses counters if parentheses
             // are detected
@@ -201,16 +201,16 @@ public class FXMLDocumentController implements Initializable {
         // declares counter variable
         int i;
         
-        // iterates through string backwards looking for last left parenthesis
-        for (i = input.length() - 1; i >= 0; i--) {
+        // iterates through string backwards looking for first right parenthesis
+        for (i = 0; i < input.length() - 1; i++) {
             
-            // breaks out of loop when the last left parenthesis is found
+            // breaks out of loop when the last right parenthesis is found
             if (input.charAt(i) == ')')
                 break;
             
         }
         
-        // returns position of last left parenthesis
+        // returns position of last right parenthesis
         return i;
 
     }
