@@ -138,7 +138,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // removes spaces from input string
-    private String removeSpaces(String input) {
+    protected String removeSpaces(String input) {
         
         // returns input string with spaces replaced with empty string
         return input.replaceAll(" ", "");
@@ -146,7 +146,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // validates correct use of parentheses
-    private Boolean validateParentheses(String input) {
+    protected Boolean validateParentheses(String input) {
         
         // declares and initializes counter variables for left and right
         // parentheses
@@ -177,7 +177,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // returns position of last left parenthesis
-    private int findLastLeftParen(String input) {
+    protected int findLastLeftParen(String input) {
         
         // declares counter variable
         int i;
@@ -197,7 +197,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // returns position of first right parenthesis
-    private int findFirstRightParen(String input) {
+    protected int findFirstRightParen(String input) {
         
         // declares counter variable
         int i;
@@ -217,7 +217,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // evaluates parenthetical expression
-    private String evaluateParen(String input) {
+    protected String evaluateParen(String input) {
         
         // declares variables to identify and hold parenthetical expression
         int i, j;
@@ -242,7 +242,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     // evaluates expression
-    private String evaluateExpression(String input) {
+    protected String evaluateExpression(String input) {
         
         // determines whether expression requires parenthetical evaluation
         if (input.contains("(")) {
