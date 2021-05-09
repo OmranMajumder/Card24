@@ -25,11 +25,6 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 
-/**
- * FXML Controller class
- *
- * @author omran
- */
 public class FXMLDocumentController implements Initializable {
     
     // declares and instantiates array lists for card, card codes, valid values, 
