@@ -139,7 +139,7 @@ public class FXMLDocumentController implements Initializable {
         timer.start();
         drawCards(cardCodes);
         games.add(new Game());
-
+        
     }    
     
     // adds card rectangle objects to array list of rectangles
@@ -218,7 +218,7 @@ public class FXMLDocumentController implements Initializable {
         int i;
         
         // iterates through string backwards looking for first right parenthesis
-        for (i = 0; i < input.length() - 1; i++) {
+        for (i = 0; i < input.length(); i++) {
             
             // breaks out of loop when the last right parenthesis is found
             if (input.charAt(i) == ')')
@@ -231,6 +231,25 @@ public class FXMLDocumentController implements Initializable {
 
     }
     
+    // returns position of first left parenthesis for case (a $ b) $ (c $ d)
+    protected int findFirstLeftParen(String input) {
+        
+        // declares counter variable
+        int i;
+        
+        // iterates through string backwards looking for first left parenthesis
+        for (i = 0; i < input.length() - 1; i++) {
+            
+            // breaks out of loop when the last left parenthesis is found
+            if (input.charAt(i) == '(')
+                break;
+            
+        }
+        
+        // returns position of last left parenthesis
+        return i;
+    }
+    
     // evaluates parenthetical expression
     protected String evaluateParen(String input) {
         
@@ -241,6 +260,9 @@ public class FXMLDocumentController implements Initializable {
         // initializes position variables with parentheses positions
         i = findLastLeftParen(input);
         j = findFirstRightParen(input);
+        
+        if (i > j)
+            i = findFirstLeftParen(input);
         
         // initializes temporary string with parenthetical expression substring
         tempString = input.substring(i + 1, j);
@@ -613,6 +635,7 @@ public class FXMLDocumentController implements Initializable {
     // stores user input values in array list for comparing with valid values
     private void parseInputValues(String input) {
         
+        inputValues.clear();
         removeSpaces(input);
         
         // iterates through input string
@@ -705,7 +728,7 @@ public class FXMLDocumentController implements Initializable {
                 // changes solution text color if correct or incorrect
                 if (Math.abs(Double.parseDouble(result) - 24.0) < 0.00001){
                     
-                    if (gameResult.equals("")) {
+                    if (gameResult.equals("") || gameResult.equals("Win")) {
                         
                         gameResult = "Win";
                         solutionText.setStyle("-fx-text-inner-color: green");
