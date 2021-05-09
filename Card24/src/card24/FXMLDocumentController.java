@@ -5,6 +5,10 @@
  */
 package card24;
 
+import card24.FXMLDocumentController.Game;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,8 +39,11 @@ public class FXMLDocumentController implements Initializable {
     ArrayList<Double> validValues = new ArrayList();
     ArrayList<Double> inputValues = new ArrayList();
     ArrayList<String> solutionOperators = new ArrayList();
+    ArrayList<Game> games = new ArrayList();
    
     private int seconds;
+    private int gameCount = 0;
+    String gameResult = "";
     
     // declares and instantiates animation timer for background-running timer
     AnimationTimer timer = new AnimationTimer() {
@@ -83,6 +90,22 @@ public class FXMLDocumentController implements Initializable {
             
     };
     
+    protected class Game {
+        
+        int time;
+        ArrayList<String> attempts;
+        String result;
+        
+        Game() {
+            
+            time = 0;
+            attempts = new ArrayList();
+            result = "";
+            
+        }
+        
+    }
+    
     @FXML
     private Rectangle cardBox1;
     @FXML
@@ -120,6 +143,7 @@ public class FXMLDocumentController implements Initializable {
         initializeTextFields();
         timer.start();
         drawCards(cardCodes);
+        games.add(new Game());
 
     }    
     
@@ -461,13 +485,28 @@ public class FXMLDocumentController implements Initializable {
     // resets array lists and text fields when game is ended
     protected void endGame() {
         
-        // Add to user game count and user results count
+        // sets game time to current time elapsed
+        games.get(gameCount).time = seconds;
+        games.get(gameCount).result = gameResult;
+        
+        // increment game counter
+        gameCount++;
+        
+        // reset values
+        gameResult = "";
         cardCodes.clear();
         validValues.clear();
         inputValues.clear();
         solutionText.clear();
         userText.clear();
-        // Run random number generator again
+        
+        // restarts timer
+        timerLabel.setText("00:00:00");
+        timer.stop();
+        timer.start();
+        
+        // starts new game
+        games.add(new Game());
         
     }
     
@@ -515,6 +554,9 @@ public class FXMLDocumentController implements Initializable {
            
             solutionText.setStyle("-fx-text-inner-color: black");
             solutionText.setText("No solution found");
+            
+            // set game result to no solution
+            gameResult = "No Solution";
             
         }
         
@@ -567,31 +609,83 @@ public class FXMLDocumentController implements Initializable {
 
     }
     
-    // imported button method for finding solution
+    // stores user input values in array list for comparing with valid values
+    private void parseInputValues(String input) {
+        
+        // iterates through input string
+        for (int i = 0; i < input.length(); i++) {
+            
+            // adds first digit to array
+            if (i == 0) {
+                
+                if (Character.isDigit(input.charAt(i))) {
+                
+                    inputValues.add(Double.parseDouble(Character.toString(input.charAt(i))));
+                
+                }
+            }
+            
+            else {
+                
+                // appends digit to previous element
+                if (Character.isDigit(input.charAt(i)) 
+                        && Character.isDigit(input.charAt(i - 1))) {
+                
+                    inputValues.set(inputValues.size() - 1, 
+                            inputValues.get(inputValues.size() - 1) * 10.0
+                                    + Double.parseDouble(Character.toString(input.charAt(i))));
+                
+                }
+                
+                // adds single digit to array
+                else if (Character.isDigit(input.charAt(i))) {
+                        
+                    inputValues.add(Double.parseDouble(Character.toString(input.charAt(i))));
+                    
+                }
+            
+            }
+            
+            
+            
+        }
+        
+        // sorts array list of input values
+        Collections.sort(inputValues);
+        
+    }
+    
+    // generates solution if found
     @FXML
     protected void findSolution(ActionEvent event) {
         
         solutionFinder(validValues);
+        games.get(gameCount).result = gameResult;
         
     }
     
-    // imported button method to refresh cards
+    // redraws cards starting a new game
     @FXML
     protected void redrawCards(ActionEvent event) {
         
         endGame();
+        
         drawCards(cardCodes);
         
     }
     
-    // imported button method to verify expression
+    // verifies whether expression equals 24
     @FXML
     protected void verifyExpression(ActionEvent event) {
+        
+        // add user input to array list of attempts
+        games.get(gameCount).attempts.add(userText.getText());
         
         try{
             
             parseInputValues(userText.getText());
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            // checks if user used valid values
             if (validValues.equals(inputValues)) {
             
                 String result = evaluateExpression(userText.getText());
@@ -608,22 +702,33 @@ public class FXMLDocumentController implements Initializable {
 
                     solutionText.setStyle("-fx-text-inner-color: green");
                     solutionText.setText("Correct! Expression equals 24!");
-
+                    
+                    if (!gameResult.equals("Loss") && !gameResult.equals("No Solution")
+                            && !gameResult.equals(""))
+                        gameResult = "Win";
+                    
                 } 
 
                 else{
 
                     solutionText.setStyle("-fx-text-inner-color: red");
                     solutionText.setText("Try again. Expression not 24.");
-
+                    
+                    // set game result to loss
+                    gameResult = "Loss";
+                    
                 }
                 
             }
             
             else {
                 
+                // outputs invalid entry in red for incorrect card values
                 solutionText.setStyle("-fx-text-inner-color: red");
                 solutionText.setText("Invalid Entry. Incorrect card values!");
+                
+                // set game result to loss
+                gameResult = "Loss";
                 
             }
             
@@ -631,6 +736,7 @@ public class FXMLDocumentController implements Initializable {
         
         catch (IllegalArgumentException e){
             
+            // outputs invalid entry message in red
             solutionText.setStyle("-fx-text-inner-color: red");
             solutionText.setText("Invalid Entry. Try again.");
             
@@ -639,49 +745,43 @@ public class FXMLDocumentController implements Initializable {
         
     }
     
-    private void parseInputValues(String input) {
+    @FXML
+    private void saveLog(ActionEvent event) throws IOException {
         
-        for (int i = 0; i < input.length(); i++) {
+        int wins = 0, losses = 0, noSolutions = 0;
+        
+        FileWriter fw = new FileWriter("Card24UserLog.txt");
+        PrintWriter pw = new PrintWriter(fw);
+        
+        pw.printf("%-12s%-12s%-12s%-12s%-15s%-15s\n", "Game", "Time", "Wins", "Losses", "No Solution", "Result");
+        
+        for (int i = 0; i < games.size(); i++) {
             
-            if (i == 0) {
+            if (games.get(i).result.equals("Win"))
+                wins++;
+            else if (games.get(i).result.equals("Loss"))
+                losses++;
+            else if (games.get(i).result.equals("No Solution"))
+                noSolutions++;
+
+            pw.printf("%-12s%02d:%02d:%02d   %-12s%-12s%-15s%-15s\n", i + 1, 
+                    games.get(i).time / 3600, games.get(i).time / 60, games.get(i).time % 60,
+                    wins, losses, noSolutions, games.get(i).result);
+            
+            for (int j = 0; j < games.get(i).attempts.size(); j++) {
                 
-                if (Character.isDigit(input.charAt(i))) {
+                pw.printf("\t\tAttempt #%s: %-25s\n", j + 1, games.get(i).attempts.get(j));
                 
-                    inputValues.add(Double.parseDouble(Character.toString(input.charAt(i))));
-                
-                }
             }
-            
-            else {
-                if (Character.isDigit(input.charAt(i)) 
-                        && Character.isDigit(input.charAt(i - 1))) {
-                
-                    inputValues.set(inputValues.size() - 1, 
-                            inputValues.get(inputValues.size() - 1) * 10.0
-                                    + Double.parseDouble(Character.toString(input.charAt(i))));
-                
-                }
-                
-                else if (Character.isDigit(input.charAt(i))) {
-                        
-                    inputValues.add(Double.parseDouble(Character.toString(input.charAt(i))));
-                    
-                }
-            
-            }
-            
-            
             
         }
         
-        Collections.sort(inputValues);
+        pw.close();
+        fw.close();
         
     }
-
-    @FXML
-    private void saveLog(ActionEvent event) {
-    }
     
+    // initializes format of text fields
     protected void initializeTextFields() {
         
         // ouputs user prompt in solution text field
