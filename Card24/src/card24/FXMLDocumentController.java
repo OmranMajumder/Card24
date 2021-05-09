@@ -561,8 +561,14 @@ public class FXMLDocumentController implements Initializable {
         }
         
         // outputs formatted solution
-        else 
+        else  {
+            
             outputSolution(values, solutionOperators);
+            
+            if (gameResult.equals(""))
+                gameResult = "Loss";
+            
+        }
         
     }
     
@@ -605,7 +611,7 @@ public class FXMLDocumentController implements Initializable {
         solutionText.setStyle("-fx-text-inner-color: black");
         solutionText.setText(String.format("((%.0f %s %.0f) %s %.0f) %s %.0f", values.get(0), 
                 operators.get(0), values.get(1), operators.get(1), values.get(2),
-                operators.get(2), values.get(3))); 
+                operators.get(2), values.get(3)));
 
     }
     
@@ -699,13 +705,19 @@ public class FXMLDocumentController implements Initializable {
 
                 // changes solution text color if correct or incorrect
                 if (Math.abs(Double.parseDouble(result) - 24.0) < 0.00001){
-
-                    solutionText.setStyle("-fx-text-inner-color: green");
-                    solutionText.setText("Correct! Expression equals 24!");
                     
                     if (!gameResult.equals("Loss") && !gameResult.equals("No Solution")
-                            && !gameResult.equals(""))
+                            && !gameResult.equals("")) {
+                        
                         gameResult = "Win";
+                        solutionText.setStyle("-fx-text-inner-color: green");
+                        solutionText.setText("Correct! Expression equals 24!");
+                        
+                    }
+                    
+                    else
+                        solutionText.setStyle("-fx-text-inner-color: red");
+                        solutionText.setText("You cheated! Try Again!");
                     
                 } 
 
@@ -763,14 +775,16 @@ public class FXMLDocumentController implements Initializable {
                 losses++;
             else if (games.get(i).result.equals("No Solution"))
                 noSolutions++;
+            else
+                games.get(i).result = "Incomplete";
 
-            pw.printf("%-12s%02d:%02d:%02d   %-12s%-12s%-15s%-15s\n", i + 1, 
+            pw.printf("%-12s%02d:%02d:%02d    %-12s%-12s%-15s%-15s\n", i + 1, 
                     games.get(i).time / 3600, games.get(i).time / 60, games.get(i).time % 60,
                     wins, losses, noSolutions, games.get(i).result);
             
             for (int j = 0; j < games.get(i).attempts.size(); j++) {
                 
-                pw.printf("\t\tAttempt #%s: %-25s\n", j + 1, games.get(i).attempts.get(j));
+                pw.printf("\t    Attempt #%s: %-25s\n", j + 1, games.get(i).attempts.get(j));
                 
             }
             
