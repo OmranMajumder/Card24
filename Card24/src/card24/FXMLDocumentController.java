@@ -139,12 +139,6 @@ public class FXMLDocumentController implements Initializable {
         timer.start();
         drawCards(cardCodes);
         games.add(new Game());
-        validValues.clear();
-        validValues.add(8.0);
-        validValues.add(6.0);
-        validValues.add(1.0);
-        validValues.add(3.0);
-        Collections.sort(validValues);
 
     }    
     
