@@ -746,7 +746,7 @@ public class FXMLDocumentController implements Initializable {
                     else {
                         
                         solutionText.setStyle("-fx-text-inner-color: red");
-                        solutionText.setText("You cheated! Try Again!");
+                        solutionText.setText("You cheated! Click Refresh!");
                         
                     }
                     
