@@ -701,12 +701,18 @@ public class FXMLDocumentController implements Initializable {
                 // changes solution text color if correct or incorrect
                 if (Math.abs(Double.parseDouble(result) - 24.0) < 0.00001){
                     
-                    if (!gameResult.equals("Loss") && !gameResult.equals("No Solution")
-                            && !gameResult.equals("")) {
+                    if (gameResult.equals("")) {
                         
                         gameResult = "Win";
                         solutionText.setStyle("-fx-text-inner-color: green");
                         solutionText.setText("Correct! Expression equals 24!");
+                        
+                    }
+                    
+                    else if (gameResult.equals("No Solution")) {
+                        
+                        solutionText.setStyle("-fx-text-inner-color: black");
+                        solutionText.setText("No Solution Exists. Click Refresh!");
                         
                     }
                     
