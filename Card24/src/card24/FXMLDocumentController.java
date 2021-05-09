@@ -139,6 +139,12 @@ public class FXMLDocumentController implements Initializable {
         timer.start();
         drawCards(cardCodes);
         games.add(new Game());
+        validValues.clear();
+        validValues.add(8.0);
+        validValues.add(6.0);
+        validValues.add(1.0);
+        validValues.add(3.0);
+        Collections.sort(validValues);
 
     }    
     
@@ -613,6 +619,8 @@ public class FXMLDocumentController implements Initializable {
     // stores user input values in array list for comparing with valid values
     private void parseInputValues(String input) {
         
+        removeSpaces(input);
+        
         // iterates through input string
         for (int i = 0; i < input.length(); i++) {
             
@@ -624,6 +632,8 @@ public class FXMLDocumentController implements Initializable {
                     inputValues.add(Double.parseDouble(Character.toString(input.charAt(i))));
                 
                 }
+                
+                else;
             }
             
             else {
@@ -716,9 +726,12 @@ public class FXMLDocumentController implements Initializable {
                         
                     }
                     
-                    else
+                    else {
+                        
                         solutionText.setStyle("-fx-text-inner-color: red");
                         solutionText.setText("You cheated! Try Again!");
+                        
+                    }
                     
                 } 
 
