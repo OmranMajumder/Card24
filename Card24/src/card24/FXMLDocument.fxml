@@ -16,7 +16,7 @@
         <URL value="@fxmldocument.css" />
     </stylesheets>
    <children>
-      <Rectangle fx:id="timerBox" arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="835.0" layoutY="25.0" strokeType="INSIDE" strokeWidth="5.0" width="170.0">
+      <Rectangle fx:id="timerBox" arcHeight="5.0" arcWidth="5.0" height="50.0" layoutX="880.0" layoutY="25.0" strokeType="INSIDE" strokeWidth="5.0" width="170.0">
          <stroke>
             <RadialGradient centerX="0.5" centerY="0.49047619047619045" cycleMethod="REFLECT" radius="1.0">
                <stops>
@@ -48,32 +48,32 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Button id="refreshButton" fx:id="refreshButton" layoutX="620.0" layoutY="25.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" onAction="#redrawCards" prefHeight="50.0" prefWidth="170.0" styleClass="btn" text="Refresh" textAlignment="CENTER">
+      <Button id="refreshButton" fx:id="refreshButton" layoutX="695.0" layoutY="25.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" onAction="#redrawCards" prefHeight="50.0" prefWidth="170.0" styleClass="btn" text="Refresh" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button id="verifyButton" fx:id="checkButton" layoutX="620.0" layoutY="475.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" onAction="#verifyExpression" prefHeight="50.0" prefWidth="170.0" styleClass="btn" text="Verify" textAlignment="CENTER">
+      <Button id="verifyButton" fx:id="checkButton" layoutX="695.0" layoutY="475.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" onAction="#verifyExpression" prefHeight="50.0" prefWidth="170.0" styleClass="btn" text="Verify" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <TextField fx:id="solutionText" editable="false" layoutX="205.0" layoutY="25.0" maxHeight="50.0" maxWidth="400.0" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="400.0">
+      <TextField fx:id="solutionText" editable="false" layoutX="205.0" layoutY="25.0" maxHeight="50.0" maxWidth="475.0" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="475.0">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <TextField fx:id="userText" layoutX="205.0" layoutY="475.0" maxHeight="50.0" maxWidth="400.0" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="400.0">
+      <TextField fx:id="userText" layoutX="205.0" layoutY="475.0" maxHeight="50.0" maxWidth="475.0" minHeight="50.0" minWidth="400.0" prefHeight="50.0" prefWidth="475.0">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
-      <Label id="timer" fx:id="timerLabel" layoutX="874.0" layoutY="31.0" prefHeight="39.0" prefWidth="110.0" text="00:00:00" textAlignment="CENTER" textFill="WHITE">
+      <Label id="timer" fx:id="timerLabel" layoutX="919.0" layoutY="31.0" prefHeight="39.0" prefWidth="110.0" text="00:00:00" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button id="verifyButton" fx:id="saveLogButton" layoutX="835.0" layoutY="475.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" onAction="#saveLog" prefHeight="50.0" prefWidth="170.0" styleClass="btn" text="Save Log" textAlignment="CENTER">
+      <Button id="verifyButton" fx:id="saveLogButton" layoutX="880.0" layoutY="475.0" maxHeight="50.0" maxWidth="170.0" minHeight="50.0" minWidth="170.0" mnemonicParsing="false" onAction="#saveLog" prefHeight="50.0" prefWidth="170.0" styleClass="btn" text="Save Log" textAlignment="CENTER">
          <font>
             <Font size="20.0" />
          </font>
