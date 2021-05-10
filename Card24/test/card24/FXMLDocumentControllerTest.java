@@ -5,7 +5,6 @@
  */
 package card24;
 
-import com.sun.xml.internal.ws.policy.AssertionSet;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -163,7 +162,7 @@ public class FXMLDocumentControllerTest {
     public void testFindFirstRightParen1() {
         System.out.println("Find First Right Paren 1:");
         String testInput = "1";
-        int expResult = 0;
+        int expResult = 1;
         int result = instance.findFirstRightParen(testInput);
         assertEquals(expResult, result);
     }
@@ -171,7 +170,7 @@ public class FXMLDocumentControllerTest {
     public void testFindFirstRightParen2() {
         System.out.println("Find First Right Paren 2:");
         String testInput = "1+9";
-        int expResult = 2;
+        int expResult = 3;
         int result = instance.findFirstRightParen(testInput);
         assertEquals(expResult, result);
     }
