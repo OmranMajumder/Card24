@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package card24;
 
 import card24.FXMLDocumentController.Game;
@@ -639,7 +634,7 @@ public class FXMLDocumentController implements Initializable {
     private void parseInputValues(String input) {
         
         inputValues.clear();
-        removeSpaces(input);
+        input = removeSpaces(input);
         
         // iterates through input string
         for (int i = 0; i < input.length(); i++) {
@@ -682,6 +677,7 @@ public class FXMLDocumentController implements Initializable {
         }
         
         // sorts array list of input values
+        Collections.sort(validValues);
         Collections.sort(inputValues);
         
     }
