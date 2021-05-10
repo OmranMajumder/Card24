@@ -1,5 +1,3 @@
 Game        Time        Wins        Losses      No Solution    Result         
-1           00:00:21    0           1           0              Loss           
-	    Attempt #1: ((4 * 8) * 9) / 12       
-2           00:00:03    0           1           1              No Solution    
-3           00:00:00    0           1           1              Incomplete     
+1           00:00:00    0           0           1              No Solution    
+	    Attempt #1: 12-4+6+10                

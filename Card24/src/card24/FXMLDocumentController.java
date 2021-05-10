@@ -530,27 +530,28 @@ public class FXMLDocumentController implements Initializable {
     // generates possible solution for set of card values
     protected void solutionFinder(ArrayList<Double> values) {
         
-        // declares variables for intermediate calculations
-        Double result0 = values.get(0);
-        Double result1, result2, result3;
-        
         // labels outer loop
         outer:
         
+        for (int shuffleCount = 0; shuffleCount < 100; shuffleCount++) {
+            
+            Collections.shuffle(values);
+            
             // iterates through arithmetic operations and calculates intermediate
             // results
             for (int i = 0; i < 4; i++) {
-
+                
+                Double result0 = values.get(0);
                 solutionOperators.clear();
-                result1 = parseOperations(result0, i, values.get(1), solutionOperators);
+                Double result1 = parseOperations(result0, i, values.get(1), solutionOperators);
                 
                 for (int j = 0; j < 4; j++) {
                     
-                    result2 = parseOperations(result1, j, values.get(2), solutionOperators);
+                    Double result2 = parseOperations(result1, j, values.get(2), solutionOperators);
                     
                     for (int k = 0; k < 4; k++) {
                         
-                        result3 = parseOperations(result2, k, values.get(3), solutionOperators);
+                        Double result3 = parseOperations(result2, k, values.get(3), solutionOperators);
                         
                         // breaks out of outer loop if solution is found
                         if (Math.abs(result3 - 24.0) < 0.00001)
@@ -565,6 +566,8 @@ public class FXMLDocumentController implements Initializable {
                 }
 
             }
+        }
+
         
         // outputs message if no solution is found
         if (solutionOperators.size() == 1) {
